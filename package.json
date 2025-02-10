@@ -1,16 +1,18 @@
 {
   "name": "mogo-ui",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "package.json"
   ],
   "main": "./dist/mogo-ui.umd.cjs",
   "exports": {
     ".": {
       "import": "./dist/mogo-ui.js",
-      "require": "./dist/house-ui.umd.cjs"
+      "require": "./dist/mogo-ui.umd.cjs"
     }
   },
   "scripts": {
