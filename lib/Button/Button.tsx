@@ -23,6 +23,10 @@ const buttonVariants = cva("cursor-pointer duration-150", {
       gost: "text-gray-700 hover:bg-gray-200 rounded-md",
       link: "text-blue-600 hover:underline rounded-md",
       dark: "bg-slate-800 hover:bg-slate-700 text-white rounded-md",
+      clicki:
+        "bg-white text-black border-1 border-slate-800 rounded-md shadow-[0px_4px_0px_#334155] transition-all duration-100 active:shadow-[0px_2px_0px_#334155] active:relative active:top-[2px]",
+      shadow:
+        "border-2 border-slate-800 rounded-md bg-white shadow-md active:shadow-inner active:bg-gray-200 active:scale-95 transition",
     },
     size: {
       small: "px-2 py-1 text-sm",
@@ -31,7 +35,7 @@ const buttonVariants = cva("cursor-pointer duration-150", {
     },
   },
   defaultVariants: {
-    variant: "primary",
+    variant: "dark",
     size: "normal",
   },
 });
