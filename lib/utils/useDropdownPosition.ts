@@ -1,70 +1,67 @@
-import { useState, useEffect, useRef, RefObject } from "react";
+import { useState, useEffect, RefObject } from "react";
+import { Position } from "./type";
 
 export function useDropdownPosition(
   targetRef: RefObject<HTMLElement | null>,
   isOpen: boolean,
-  defaultPosition: "left" | "right" | "top" | "bottom" = "bottom"
+  defaultPosition: Position = "bottom"
 ) {
-  const [position, setPosition] = useState<"left" | "right" | "top" | "bottom">(
-    defaultPosition
-  );
-  const lastValidPosition = useRef(defaultPosition); // Simpan posisi terakhir yang valid
+  const [position, setPosition] = useState(defaultPosition);
 
   useEffect(() => {
     if (!targetRef.current || !isOpen) return;
 
     const target = targetRef.current;
-
     const updatePosition = () => {
       if (!target) return;
 
       const rect = target.getBoundingClientRect();
-      const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
-      const threshold = 5; // Jika kurang dari 5px, ganti posisi
 
-      let newPosition = lastValidPosition.current; // Mulai dengan posisi terakhir yang valid
+      // Toleransi jarak dari batas viewport (dalam piksel)
+      const tolerance = 0;
 
-      // Cek posisi vertikal
-      if (windowHeight - rect.bottom < threshold) {
-        newPosition = "top";
-      } else if (rect.top < threshold) {
-        newPosition = "bottom";
+      let newPosition = position;
+
+      // Jika posisi saat ini adalah bottom
+      if (position === "bottom") {
+        // Jika tidak ada cukup ruang di bawah, ubah ke top
+        if (rect.bottom + target.offsetHeight > windowHeight - tolerance) {
+          newPosition = "top";
+        }
+      }
+      // Jika posisi saat ini adalah top
+      else if (position === "top") {
+        // Jika tidak ada cukup ruang di atas, ubah kembali ke bottom
+        if (rect.top - target.offsetHeight < tolerance) {
+          newPosition = "bottom";
+        }
+      }
+      // Jika posisi saat ini adalah left
+      else if (position === "left") {
+        if (rect.left - target.offsetWidth < tolerance) {
+          newPosition = "right";
+        }
+      }
+      // Jika posisi saat ini adalah left
+      else if (position === "right") {
+        if (rect.right - target.offsetWidth < tolerance) {
+          newPosition = "left";
+        }
       }
 
-      // Cek posisi horizontal
-      if (rect.left < threshold) {
-        newPosition = "right";
-      } else if (windowWidth - rect.right < threshold) {
-        newPosition = "left";
-      }
-
-      // Jika posisi baru valid, simpan sebagai posisi terakhir
-      if (newPosition !== lastValidPosition.current) {
-        lastValidPosition.current = newPosition;
-        setPosition(newPosition);
-      }
+      setPosition(newPosition);
     };
 
     updatePosition();
 
-    window.addEventListener("resize", updatePosition);
-    window.addEventListener("scroll", updatePosition, true); // Update saat scroll
-
-    // Gunakan MutationObserver untuk mendeteksi perubahan DOM
-    const observer = new MutationObserver(updatePosition);
-    observer.observe(document.body, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-    });
+    const handleScroll = () => requestAnimationFrame(updatePosition);
+    window.addEventListener("scroll", handleScroll, true);
 
     return () => {
-      window.removeEventListener("resize", updatePosition);
-      window.removeEventListener("scroll", updatePosition, true);
-      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll, true);
     };
-  }, [targetRef, isOpen]); // Tetap gunakan `isOpen` agar event listener dihapus saat dropdown ditutup
+  }, [targetRef, isOpen, position]);
 
   return { position };
 }

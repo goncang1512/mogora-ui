@@ -57,7 +57,7 @@ export const Select: SelectComponent = ({
         type="text"
         hidden
       />
-      <div className={cn("relative w-full", className)} {...props}>
+      <div className={cn("relative", className)} {...props}>
         {children}
       </div>
     </SelectContext.Provider>
@@ -70,7 +70,7 @@ interface TriggerProps
   children: ReactNode;
 }
 
-export const Trigger: React.FC<TriggerProps> = ({
+const Trigger: React.FC<TriggerProps> = ({
   children,
   className,
   ...props
@@ -80,7 +80,7 @@ export const Trigger: React.FC<TriggerProps> = ({
     <div
       ref={buttonTrigger}
       onClick={() => setSeeOption(!seeOption)}
-      className={cn("w-full", className)}
+      className={cn("", className)}
       {...props}
     >
       {children}
@@ -121,26 +121,28 @@ interface ContentProps extends HTMLAttributes<HTMLUListElement> {
   children: ReactNode;
 }
 
-export const Content: React.FC<ContentProps> = ({ children, className }) => {
+const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
   const { seeOption, setSeeOption, buttonTrigger } = useContext(SelectContext);
   const ulRef = useRef<HTMLUListElement>(null);
   useClickOutside([ulRef, buttonTrigger], () => setSeeOption(false));
   const { position } = useDropdownPosition(ulRef, seeOption, "bottom");
 
-  return (
-    <ul
-      ref={ulRef}
-      className={cn(
-        "border p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
-        seeOption ? "block" : "hidden",
-        position === "bottom" ? "top-full mb-6" : "",
-        position === "top" ? "bottom-full" : "",
-        className
-      )}
-    >
-      {children}
-    </ul>
-  );
+  if (seeOption) {
+    return (
+      <ul
+        ref={ulRef}
+        className={cn(
+          "border p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
+          position === "top" ? "bottom-full" : "",
+          position === "bottom" ? "top-full" : "",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </ul>
+    );
+  }
 };
 
 Select.Trigger = Trigger;

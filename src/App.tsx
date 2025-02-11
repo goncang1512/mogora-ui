@@ -1,4 +1,4 @@
-import { Button, Input, Label, Select } from "mogo-ui";
+import { Button, Input, Label, Popover, Select } from "mogo-ui";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -46,23 +46,39 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3">
-        <form onSubmit={onSubmit} className="w-full flex flex-col gap-2 pl-5">
-          <Select name="name" className="rounded-lg w-full">
-            <Select.Trigger className="w-full">
-              <Button variant={"primary"} className="w-full" type="button">
-                Choose
-              </Button>
-            </Select.Trigger>
-            <Select.Content>
-              <Select.Item value={"goncang"}>goncang</Select.Item>
-              <Select.Item value={"samudera"}>samudera</Select.Item>
-            </Select.Content>
-          </Select>
-          <Button type="submit">submit</Button>
-        </form>
-      </div>
       <div className="h-screen"></div>
+      <div className="h-screen">
+        <div className="grid grid-cols-3">
+          <form onSubmit={onSubmit} className="w-full flex flex-col gap-2 pl-5">
+            <Select name="name" className="rounded-lg w-full">
+              <Select.Trigger className="w-full">
+                <Button variant={"primary"} className="w-full" type="button">
+                  Choose
+                </Button>
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Item value={"goncang"}>goncang</Select.Item>
+                <Select.Item value={"samudera"}>samudera</Select.Item>
+              </Select.Content>
+            </Select>
+            <Button type="submit">submit</Button>
+          </form>
+        </div>
+      </div>
+
+      <div className="h-screen grid grid-cols-4 gap-3">
+        <Popover>
+          <Popover.Trigger>
+            <Button variant={"primary"} className="w-full" type="button">
+              klik
+            </Button>
+          </Popover.Trigger>
+          <Popover.Content className="flex flex-col gap-2">
+            <Button>Edit</Button>
+            <Button>Delete</Button>
+          </Popover.Content>
+        </Popover>
+      </div>
     </div>
   );
 }
