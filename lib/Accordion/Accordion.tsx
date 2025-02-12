@@ -40,10 +40,9 @@ const Trigger: React.FC<TriggerProps> = ({
     >
       {children}
       <ChevronDown
+        data-open={valueItem === value}
         size={20}
-        className={`${
-          valueItem === value ? "rotate-[180deg]" : ""
-        } duration-150`}
+        className={`data-[open=true]:rotate-[180deg] duration-150 text-gray-600 dark:text-gray-400`}
       />
     </button>
   );
@@ -55,11 +54,10 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
 
   return (
     <div
+      data-open={valueItem === value}
       className={cn(
         "overflow-hidden dark:text-slate-200 transition-all duration-200 ease-in-out",
-        valueItem === value
-          ? "max-h-96 opacity-100 py-2"
-          : "max-h-0 opacity-0 py-0",
+        "data-[open=true]:max-h-96 data-[open=true]:opacity-100 data-[open=true]:py-2 data-[open=false]:max-h-0 data-[open=false]:opacity-0 data-[open=false]:py-0",
         className
       )}
       {...props}

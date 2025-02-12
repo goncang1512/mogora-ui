@@ -1,10 +1,6 @@
 import React, {
   createContext,
-  Dispatch,
-  HTMLAttributes,
   ReactNode,
-  RefObject,
-  SetStateAction,
   useContext,
   useRef,
   useState,
@@ -12,21 +8,12 @@ import React, {
 import { cn } from "../utils/utils";
 import { useClickOutside } from "../utils/clickoutside";
 import { useDropdownPosition } from "../utils/useDropdownPosition";
-
-interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
-
-type PopoverComponent = React.FC<PopoverProps> & {
-  Trigger: React.FC<TriggerProps>;
-  Content: React.FC<ContentProps>;
-};
-
-type PopoverType = {
-  seeContent: boolean;
-  setSeeContent: Dispatch<SetStateAction<boolean>>;
-  buttonTrigger: RefObject<HTMLDivElement | null>;
-};
+import {
+  PopoverComponent,
+  PopoverType,
+  TriggerProps,
+  ContentProps,
+} from "./types";
 
 const PopoverContext = createContext<PopoverType>({} as PopoverType);
 
@@ -49,11 +36,6 @@ export const Popover: PopoverComponent = ({ children, ...props }) => {
   );
 };
 
-interface TriggerProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-  asChild?: boolean;
-}
-
 const Trigger: React.FC<TriggerProps> = ({
   children,
   className,
@@ -74,11 +56,6 @@ const Trigger: React.FC<TriggerProps> = ({
     </span>
   );
 };
-
-interface ContentProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-  align?: "left" | "right";
-}
 
 const Content: React.FC<ContentProps> = ({
   children,

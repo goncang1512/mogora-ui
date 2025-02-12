@@ -96,6 +96,11 @@ function App() {
               <Accordion.Content>hello samudera</Accordion.Content>
               <Accordion.Content>hello samudera</Accordion.Content>
             </Accordion.Item>
+            <Accordion.Item value={"item-3"}>
+              <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+              <Accordion.Content>hello samudera</Accordion.Content>
+              <Accordion.Content>hello samudera</Accordion.Content>
+            </Accordion.Item>
           </Accordion>
         </div>
       </div>
