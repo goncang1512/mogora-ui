@@ -6,7 +6,6 @@ import React, {
   RefObject,
   SetStateAction,
   useContext,
-  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -23,76 +22,56 @@ type PopoverComponent = React.FC<PopoverProps> & {
   Content: React.FC<ContentProps>;
 };
 
-type sizeComponent = { width: number | string; height: number | string };
-
 type PopoverType = {
   seeContent: boolean;
   setSeeContent: Dispatch<SetStateAction<boolean>>;
   buttonTrigger: RefObject<HTMLDivElement | null>;
-  triggerSize: sizeComponent;
-  setTriggerSize: Dispatch<SetStateAction<sizeComponent>>;
 };
 
 const PopoverContext = createContext<PopoverType>({} as PopoverType);
 
-export const Popover: PopoverComponent = ({ children }) => {
+export const Popover: PopoverComponent = ({ children, ...props }) => {
   const [seeContent, setSeeContent] = useState(false);
   const buttonTrigger = useRef<HTMLDivElement | null>(null);
-  const [triggerSize, setTriggerSize] = useState<sizeComponent>({
-    width: 0,
-    height: 0,
-  });
+
   return (
     <PopoverContext.Provider
       value={{
         seeContent,
         setSeeContent,
         buttonTrigger,
-        triggerSize,
-        setTriggerSize,
       }}
     >
-      <div
-        className={cn("relative")}
-        style={{
-          width: triggerSize.width ? `${triggerSize.width}px` : "auto",
-          height: triggerSize.height ? `${triggerSize.height}px` : "auto",
-        }}
-      >
+      <span className={cn("relative bg-green-500")} {...props}>
         {children}
-      </div>
+      </span>
     </PopoverContext.Provider>
   );
 };
 
 interface TriggerProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  asChild?: boolean;
 }
 
 const Trigger: React.FC<TriggerProps> = ({
   children,
   className,
+  asChild,
   ...props
 }): ReactNode => {
-  const { seeContent, setSeeContent, buttonTrigger, setTriggerSize } =
+  const { seeContent, setSeeContent, buttonTrigger } =
     useContext(PopoverContext);
 
-  useLayoutEffect(() => {
-    if (buttonTrigger.current) {
-      const { width, height } = buttonTrigger.current.getBoundingClientRect();
-      setTriggerSize({ width, height });
-    }
-  }, [seeContent]);
-
   return (
-    <div
+    <span
       ref={buttonTrigger}
       onClick={() => setSeeContent(!seeContent)}
       className={cn("cursor-pointer", className)}
       {...props}
     >
       {children}
-    </div>
+    </span>
   );
 };
 
@@ -118,7 +97,7 @@ const Content: React.FC<ContentProps> = ({
       <div
         ref={divRef}
         className={cn(
-          "z-30 border top-1 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200",
+          "z-30 min-w-full border top-1 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200",
           position === "left" ? "right-[97%]" : "",
           position === "right" ? "left-[97%]" : "",
           className
