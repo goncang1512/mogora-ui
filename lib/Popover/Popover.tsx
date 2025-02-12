@@ -97,7 +97,7 @@ const Content: React.FC<ContentProps> = ({
       <div
         ref={divRef}
         className={cn(
-          "z-30 min-w-full border top-1 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200",
+          "z-30 border top-1 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200",
           position === "left" ? "right-[97%]" : "",
           position === "right" ? "left-[97%]" : "",
           className

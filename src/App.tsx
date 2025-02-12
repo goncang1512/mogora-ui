@@ -1,4 +1,4 @@
-import { Button, Input, Label, Popover, Select } from "mogo-ui";
+import { Accordion, Button, Input, Label, Popover, Select } from "mogo-ui";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -84,6 +84,20 @@ function App() {
             </div>
           );
         })}
+        <div>
+          <Accordion>
+            <Accordion.Item value={"item-1"}>
+              <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+              <Accordion.Content>hello goncang</Accordion.Content>
+              <Accordion.Content>hello goncang</Accordion.Content>
+            </Accordion.Item>
+            <Accordion.Item value={"item-2"}>
+              <Accordion.Trigger>Is it accessible?</Accordion.Trigger>
+              <Accordion.Content>hello samudera</Accordion.Content>
+              <Accordion.Content>hello samudera</Accordion.Content>
+            </Accordion.Item>
+          </Accordion>
+        </div>
       </div>
     </div>
   );
