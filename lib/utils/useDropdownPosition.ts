@@ -17,6 +17,7 @@ export function useDropdownPosition(
 
       const rect = target.getBoundingClientRect();
       const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
 
       // Toleransi jarak dari batas viewport (dalam piksel)
       const tolerance = 0;
@@ -45,7 +46,7 @@ export function useDropdownPosition(
       }
       // Jika posisi saat ini adalah left
       else if (position === "right") {
-        if (rect.right - target.offsetWidth < tolerance) {
+        if (rect.right + target.offsetWidth > windowWidth - tolerance) {
           newPosition = "left";
         }
       }

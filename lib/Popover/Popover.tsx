@@ -83,7 +83,7 @@ interface ContentProps extends HTMLAttributes<HTMLDivElement> {
 const Content: React.FC<ContentProps> = ({
   children,
   className,
-  align = "right",
+  align = "left",
   ...props
 }): ReactNode => {
   const { seeContent, setSeeContent, buttonTrigger } =

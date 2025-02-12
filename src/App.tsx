@@ -66,20 +66,24 @@ function App() {
         </div>
       </div>
 
-      <div className="h-screen grid grid-cols-4 gap-3">
-        <div>
-          <Popover>
-            <Popover.Trigger>
-              <Button variant={"primary"} className="w-full" type="button">
-                klik
-              </Button>
-            </Popover.Trigger>
-            <Popover.Content className="flex flex-col gap-2">
-              <Button>Edit</Button>
-              <Button>Delete</Button>
-            </Popover.Content>
-          </Popover>
-        </div>
+      <div className="h-screen grid grid-cols-4 gap-3 px-10">
+        {Array.from({ length: 4 }).map(() => {
+          return (
+            <div>
+              <Popover>
+                <Popover.Trigger>
+                  <Button variant={"primary"} className="w-full" type="button">
+                    klik
+                  </Button>
+                </Popover.Trigger>
+                <Popover.Content className="flex flex-col gap-2">
+                  <Button>Edit</Button>
+                  <Button>Delete</Button>
+                </Popover.Content>
+              </Popover>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
