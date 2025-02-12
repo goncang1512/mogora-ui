@@ -1,4 +1,12 @@
-import { Accordion, Button, Input, Label, Popover, Select } from "mogo-ui";
+import {
+  Accordion,
+  Button,
+  Checkbox,
+  Input,
+  Label,
+  Popover,
+  Select,
+} from "mogo-ui";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -19,13 +27,21 @@ function App() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
+    const name = formData.get("remember");
     console.log(name);
-    alert(`I choose ${name}`);
+    alert(`I choose "${name}"`);
   };
 
   return (
     <div className="dark:bg-slate-800 bg-white min-h-screen">
+      <div className="p-10">
+        <form onSubmit={onSubmit}>
+          <Checkbox name="remember" size={"sm"} variant={"warning"} />
+          <Button type="submit" variant={"clicki"} size={"small"}>
+            on Click
+          </Button>
+        </form>
+      </div>
       <div className="p-5">
         <Button
           variant={"clicki"}
