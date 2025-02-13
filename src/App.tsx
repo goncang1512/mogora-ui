@@ -6,6 +6,7 @@ import {
   Label,
   Popover,
   Select,
+  Textarea,
   Toggle,
 } from "mogo-ui";
 import { useEffect, useState } from "react";
@@ -41,6 +42,7 @@ function App() {
         <Toggle pressed={onPressed} onPressedChange={setOnPressed}>
           B
         </Toggle>
+        <Textarea theme={"danger"} />
       </div>
       <div className="p-10">
         <form onSubmit={onSubmit}>

@@ -6,4 +6,5 @@ export { Popover } from "./Popover/Popover";
 export { Accordion } from "./Accordion/Accordion";
 export { Checkbox } from "./Checkbox/Checkbox";
 export { Toggle } from "./Toggle/Toggle";
+export { Textarea } from "./Textarea/Textarea";
 export { useClickOutside } from "./utils/clickoutside";
