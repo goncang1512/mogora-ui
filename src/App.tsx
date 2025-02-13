@@ -6,6 +6,7 @@ import {
   Label,
   Popover,
   Select,
+  Toggle,
 } from "mogo-ui";
 import { useEffect, useState } from "react";
 
@@ -32,11 +33,19 @@ function App() {
     alert(`I choose "${name}"`);
   };
 
+  const [onPressed, setOnPressed] = useState(false);
+
   return (
     <div className="dark:bg-slate-800 bg-white min-h-screen">
       <div className="p-10">
+        <Toggle pressed={onPressed} onPressedChange={setOnPressed}>
+          B
+        </Toggle>
+      </div>
+      <div className="p-10">
         <form onSubmit={onSubmit}>
-          <Checkbox name="remember" size={"sm"} variant={"warning"} />
+          <Checkbox name="remember" size={"sm"} variant={"primary"} />
+          <Label htmlFor="remember">goncang</Label>
           <Button type="submit" variant={"clicki"} size={"small"}>
             on Click
           </Button>
