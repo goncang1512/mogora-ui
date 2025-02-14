@@ -1,6 +1,8 @@
+import { EllipsisVertical, MoveRight } from "lucide-react";
 import {
   Accordion,
   Button,
+  Card,
   Checkbox,
   Input,
   Label,
@@ -37,7 +39,42 @@ function App() {
   const [onPressed, setOnPressed] = useState(false);
 
   return (
-    <div className="dark:bg-slate-800 bg-white min-h-screen">
+    <div className="dark:bg-slate-800 bg-white min-h-screen p-10">
+      <Card className="">
+        <Card.Picture src="https://flowbite.com/docs/images/blog/image-1.jpg" />
+        <Card.Header className="flex items-center justify-between">
+          <Card.Title>Noteworthy technology acquisitions 2021</Card.Title>
+          <Popover>
+            <Popover.Trigger className="cursor-pointer">
+              <button className="cursor-pointer hover:bg-gray-200 size-8 flex items-center justify-center rounded-md">
+                <EllipsisVertical size={20} />
+              </button>
+            </Popover.Trigger>
+            <Popover.Content align="left" className="w-32">
+              <button className="hover:bg-gray-300 rounded-md w-full py-1">
+                Edit
+              </button>
+              <button className="hover:bg-gray-300 rounded-md w-full py-1">
+                Delete
+              </button>
+              <button className="hover:bg-gray-300 rounded-md w-full py-1">
+                Add
+              </button>
+            </Popover.Content>
+          </Popover>
+        </Card.Header>
+        <Card.Content>
+          <p>
+            Here are the biggest enterprise technology acquisitions of 2021 so
+            far, in reverse chronological order.
+          </p>
+        </Card.Content>
+        <Card.Footer>
+          <Button className="flex items-center gap-2" variant={"primary"}>
+            Read more <MoveRight size={20} />
+          </Button>
+        </Card.Footer>
+      </Card>
       <div className="p-10">
         <Toggle pressed={onPressed} onPressedChange={setOnPressed}>
           B
