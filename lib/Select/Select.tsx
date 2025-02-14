@@ -55,6 +55,7 @@ export const Select: SelectComponent = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         type="text"
+        readOnly
         hidden
       />
       <div className={cn("relative", className)} {...props}>
