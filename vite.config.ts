@@ -3,10 +3,20 @@ import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
+import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigPaths(), tailwindcss()],
+  plugins: [
+    react(),
+    tsconfigPaths(),
+    tailwindcss(),
+    dts({
+      rollupTypes: true,
+      insertTypesEntry: true, // Pastikan entry .d.ts dibuat
+      include: ["lib/**/*.ts", "lib/**/*.tsx"],
+    }),
+  ],
   build: {
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),
@@ -20,6 +30,12 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "react/jsx-runtime",
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith(".css")) {
+            return "style.css";
+          }
+          return assetInfo.name!;
         },
       },
     },

@@ -8,12 +8,15 @@
     "package.json"
   ],
   "main": "./dist/tano-ui.umd.cjs",
+  "types": "./dist/tano-ui.d.ts",
   "exports": {
     ".": {
       "import": "./dist/tano-ui.js",
       "require": "./dist/tano-ui.umd.cjs"
-    }
+    },
+    "./dist/tano-ui.css": "./dist/tano-ui.css"
   },
+  "sideEffects": false,
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -44,6 +47,7 @@
     "globals": "^15.14.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.22.0",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "vite-plugin-dts": "^4.5.0"
   }
 }
