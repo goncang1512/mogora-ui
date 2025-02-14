@@ -10,3 +10,5 @@ export { Toggle } from "./Toggle/Toggle";
 export { Textarea } from "./Textarea/Textarea";
 export { Card } from "./Card/Card";
 export { useClickOutside } from "./utils/clickoutside";
+
+export type { ButtonProps } from "./Button/Button";
