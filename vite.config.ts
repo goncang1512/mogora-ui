@@ -13,8 +13,7 @@ export default defineConfig({
     tailwindcss(),
     dts({
       rollupTypes: true,
-      insertTypesEntry: true, // Pastikan entry .d.ts dibuat
-      include: ["lib/**/*.ts", "lib/**/*.tsx"],
+      insertTypesEntry: true,
     }),
   ],
   build: {
