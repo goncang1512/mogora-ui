@@ -1,5 +1,11 @@
+import { Button } from "tano-ui";
+
 function App() {
-  return <div>hello world</div>;
+  return (
+    <div>
+      <Button variant={"clicki"}>Klik</Button>
+    </div>
+  );
 }
 
 export default App;
