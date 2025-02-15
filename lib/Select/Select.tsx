@@ -9,6 +9,7 @@ import React, {
   useContext,
   useRef,
   RefObject,
+  useEffect,
 } from "react";
 import { cn } from "../utils/utils";
 import { VariantProps } from "class-variance-authority";
@@ -19,6 +20,8 @@ import { useDropdownPosition } from "../utils/useDropdownPosition";
 interface SelectProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   name?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 type SelectComponent = React.FC<SelectProps> & {
@@ -30,9 +33,10 @@ type SelectComponent = React.FC<SelectProps> & {
 interface SelectType {
   seeOption: boolean;
   setSeeOption: Dispatch<SetStateAction<boolean>>;
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  valueOnChange: string;
+  setOnChange: Dispatch<SetStateAction<string>>;
   buttonTrigger: RefObject<HTMLDivElement | null>;
+  handleChange: (newValue: string) => void;
 }
 
 const SelectContext = createContext<SelectType>({} as SelectType);
@@ -41,19 +45,43 @@ export const Select: SelectComponent = ({
   children,
   className,
   name,
+  value,
+  onChange,
   ...props
 }): ReactNode => {
   const [seeOption, setSeeOption] = useState(false);
   const buttonTrigger = useRef<HTMLDivElement | null>(null);
-  const [value, setValue] = useState("");
+  const [valueOnChange, setOnChange] = useState(value ?? "");
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setOnChange(value);
+    }
+  }, [value]);
+
+  const handleChange = (newValue: string) => {
+    const event = {
+      target: { value: newValue },
+    } as React.ChangeEvent<HTMLInputElement>;
+    setOnChange(newValue);
+    onChange?.(event);
+  };
+
   return (
     <SelectContext.Provider
-      value={{ seeOption, setSeeOption, value, setValue, buttonTrigger }}
+      value={{
+        seeOption,
+        setSeeOption,
+        valueOnChange,
+        setOnChange,
+        buttonTrigger,
+        handleChange,
+      }}
     >
       <input
         name={name}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={valueOnChange}
+        onChange={(e) => handleChange(e.target.value)}
         type="text"
         readOnly
         hidden
@@ -100,11 +128,11 @@ const Item: React.FC<ItemProps> = ({
   className,
   ...props
 }) => {
-  const { setValue, setSeeOption } = useContext(SelectContext);
+  const { handleChange, setSeeOption } = useContext(SelectContext);
   return (
     <li
       onClick={() => {
-        setValue(value);
+        handleChange(value);
         setSeeOption(false);
       }}
       className={cn(

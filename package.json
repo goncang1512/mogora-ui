@@ -1,20 +1,20 @@
 {
-  "name": "tano-ui",
-  "version": "0.0.3",
+  "name": "mogu-ui",
+  "version": "0.0.4",
   "type": "module",
   "files": [
     "dist",
     "README.md",
     "package.json"
   ],
-  "main": "./dist/tano-ui.umd.cjs",
-  "module": "./dist/tano-ui.js",
+  "main": "./dist/mogu-ui.umd.cjs",
+  "module": "./dist/mogu-ui.js",
   "exports": {
     ".": {
-      "import": "./dist/tano-ui.js",
-      "require": "./dist/tano-ui.umd.cjs"
+      "import": "./dist/mogu-ui.js",
+      "require": "./dist/mogu-ui.umd.cjs"
     },
-    "./dist/tano-ui.css": "./dist/tano-ui.css"
+    "./dist/style.css": "./dist/style.css"
   },
   "sideEffects": false,
   "scripts": {

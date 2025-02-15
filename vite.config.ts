@@ -19,8 +19,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),
-      name: "tano-ui",
-      fileName: "tano-ui",
+      name: "mogu-ui",
+      fileName: "mogu-ui",
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],

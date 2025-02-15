@@ -1,4 +1,9 @@
-import React, { ButtonHTMLAttributes, ReactNode, useState } from "react";
+import React, {
+  ButtonHTMLAttributes,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { cn } from "../utils/utils";
 
 interface ToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,13 +23,21 @@ export const Toggle: React.FC<ToggleProps> = ({
 }): ReactNode => {
   const [onPressed, setOnPressed] = useState(defaultPressed);
 
-  const isPressed = pressed ?? onPressed;
+  useEffect(() => {
+    setOnPressed(defaultPressed);
+  }, [defaultPressed]);
+
+  const isControlled = pressed !== undefined;
+  const isPressed = isControlled ? pressed : onPressed;
 
   const handleClick = () => {
     const newPressed = !isPressed;
+
     if (onPressedChange) {
       onPressedChange(newPressed);
-    } else {
+    }
+
+    if (!isControlled) {
       setOnPressed(newPressed);
     }
   };
@@ -37,7 +50,7 @@ export const Toggle: React.FC<ToggleProps> = ({
         className
       )}
       aria-pressed={isPressed}
-      data-state={isPressed}
+      data-state={isPressed ? "true" : "false"}
       {...props}
     >
       {children}
