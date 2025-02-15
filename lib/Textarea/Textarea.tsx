@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import React, { ReactNode, TextareaHTMLAttributes } from "react";
 import { cn } from "../utils/utils";
 
-interface Textarea
+interface TextareaProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size">,
     VariantProps<typeof texareaVariant> {}
 
@@ -35,7 +35,7 @@ const texareaVariant = cva("", {
   },
 });
 
-export const Textarea: React.FC<Textarea> = ({
+export const Textarea: React.FC<TextareaProps> = ({
   className,
   variant,
   size,

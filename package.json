@@ -8,7 +8,7 @@
     "package.json"
   ],
   "main": "./dist/tano-ui.umd.cjs",
-  "types": "./dist/tano-ui.d.ts",
+  "module": "./dist/tano-ui.js",
   "exports": {
     ".": {
       "import": "./dist/tano-ui.js",

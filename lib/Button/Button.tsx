@@ -3,7 +3,7 @@ import { cn } from "../utils/utils";
 import { VariantProps } from "class-variance-authority";
 import { buttonVariants } from "./variants";
 
-interface ButtonProps
+export interface ButtonProps
   extends VariantProps<typeof buttonVariants>,
     ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;

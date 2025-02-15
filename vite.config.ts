@@ -12,8 +12,8 @@ export default defineConfig({
     tsconfigPaths(),
     tailwindcss(),
     dts({
-      insertTypesEntry: true,
-      include: ["lib/**/*.ts", "lib/**/*.tsx"],
+      rollupTypes: true,
+      tsconfigPath: "./tsconfig.app.json",
     }),
   ],
   build: {
