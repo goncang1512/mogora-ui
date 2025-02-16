@@ -37,6 +37,8 @@ interface SelectType {
   setOnChange: Dispatch<SetStateAction<string>>;
   buttonTrigger: RefObject<HTMLDivElement | null>;
   handleChange: (newValue: string) => void;
+  options: string;
+  setOptions: Dispatch<SetStateAction<string>>;
 }
 
 const SelectContext = createContext<SelectType>({} as SelectType);
@@ -52,6 +54,7 @@ export const Select: SelectComponent = ({
   const [seeOption, setSeeOption] = useState(false);
   const buttonTrigger = useRef<HTMLDivElement | null>(null);
   const [valueOnChange, setOnChange] = useState(value ?? "");
+  const [options, setOptions] = useState("");
 
   useEffect(() => {
     if (value !== undefined) {
@@ -76,6 +79,8 @@ export const Select: SelectComponent = ({
         setOnChange,
         buttonTrigger,
         handleChange,
+        options,
+        setOptions,
       }}
     >
       <input
@@ -104,7 +109,8 @@ const Trigger: React.FC<TriggerProps> = ({
   className,
   ...props
 }): ReactNode => {
-  const { seeOption, setSeeOption, buttonTrigger } = useContext(SelectContext);
+  const { seeOption, setSeeOption, options, buttonTrigger } =
+    useContext(SelectContext);
   return (
     <div
       ref={buttonTrigger}
@@ -112,13 +118,13 @@ const Trigger: React.FC<TriggerProps> = ({
       className={cn("", className)}
       {...props}
     >
-      {children}
+      {options ? options : children}
     </div>
   );
 };
 
 interface ItemProps extends LiHTMLAttributes<HTMLLIElement> {
-  children: ReactNode;
+  children: string;
   value: string;
 }
 
@@ -128,12 +134,13 @@ const Item: React.FC<ItemProps> = ({
   className,
   ...props
 }) => {
-  const { handleChange, setSeeOption } = useContext(SelectContext);
+  const { handleChange, setSeeOption, setOptions } = useContext(SelectContext);
   return (
     <li
       onClick={() => {
         handleChange(value);
         setSeeOption(false);
+        setOptions(children);
       }}
       className={cn(
         "list-none cursor-pointer hover:bg-gray-300 px-2 py-1 rounded-md",
@@ -161,7 +168,7 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
       <ul
         ref={ulRef}
         className={cn(
-          "border p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
+          "border border-gray-200 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
           position === "top" ? "bottom-full" : "",
           position === "bottom" ? "top-full" : "",
           className
