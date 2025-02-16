@@ -10,4 +10,5 @@ export { Toggle } from "./Toggle/Toggle";
 export { Textarea } from "./Textarea/Textarea";
 export { Card } from "./Card/Card";
 export { Modal } from "./Modal/Modal";
+export { Sheet } from "./Sheet/Sheet";
 export { useClickOutside } from "./utils/clickoutside";

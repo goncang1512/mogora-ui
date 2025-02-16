@@ -11,7 +11,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "tano-ui": ["./lib/main.ts"]
+      "mogu-ui": ["./lib/main.ts"]
     },
 
     /* Bundler mode */
