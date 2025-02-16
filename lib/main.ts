@@ -9,4 +9,5 @@ export { Checkbox } from "./Checkbox/Checkbox";
 export { Toggle } from "./Toggle/Toggle";
 export { Textarea } from "./Textarea/Textarea";
 export { Card } from "./Card/Card";
+export { Modal } from "./Modal/Modal";
 export { useClickOutside } from "./utils/clickoutside";
