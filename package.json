@@ -1,18 +1,18 @@
 {
-  "name": "mogu-ui",
-  "version": "0.1.5",
+  "name": "mogora-ui",
+  "version": "0.0.0",
   "type": "module",
   "files": [
     "dist",
     "README.md",
     "package.json"
   ],
-  "main": "./dist/mogu-ui.umd.cjs",
-  "module": "./dist/mogu-ui.js",
+  "main": "./dist/mogora-ui.umd.cjs",
+  "module": "./dist/mogora-ui.js",
   "exports": {
     ".": {
-      "import": "./dist/mogu-ui.js",
-      "require": "./dist/mogu-ui.umd.cjs"
+      "import": "./dist/mogora-ui.js",
+      "require": "./dist/mogora-ui.umd.cjs"
     },
     "./dist/style.css": "./dist/style.css"
   },

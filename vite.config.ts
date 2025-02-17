@@ -19,8 +19,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),
-      name: "mogu-ui",
-      fileName: "mogu-ui",
+      name: "mogora-ui",
+      fileName: "mogora-ui",
     },
     rollupOptions: {
       external: ["react", "react-dom", "react/jsx-runtime"],
