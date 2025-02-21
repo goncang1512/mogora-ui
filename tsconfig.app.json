@@ -11,7 +11,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "paths": {
-      "mogu-ui": ["./lib/main.ts"]
+      "mogora-ui": ["./lib/main.ts"]
     },
 
     /* Bundler mode */
