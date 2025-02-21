@@ -11,4 +11,5 @@ export { Textarea } from "./Textarea/Textarea";
 export { Card } from "./Card/Card";
 export { Modal } from "./Modal/Modal";
 export { Sheet } from "./Sheet/Sheet";
+export { Badge } from "./Badge/Badge";
 export { useClickOutside } from "./utils/clickoutside";
