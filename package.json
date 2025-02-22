@@ -14,7 +14,9 @@
       "import": "./dist/mogora-ui.js",
       "require": "./dist/mogora-ui.umd.cjs"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./style.css": {
+      "default": "./dist/style.css"
+    }
   },
   "sideEffects": false,
   "scripts": {
