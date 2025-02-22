@@ -12,7 +12,6 @@ const AvatarContext = createContext<AvatarType>({} as AvatarType);
 export const Avatar: AvatarComponent = ({ children }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   return (
     <AvatarContext.Provider
       value={{
@@ -20,8 +19,6 @@ export const Avatar: AvatarComponent = ({ children }) => {
         setIsLoaded,
         hasError,
         setHasError,
-        isLoading,
-        setIsLoading,
       }}
     >
       {children}
@@ -30,18 +27,8 @@ export const Avatar: AvatarComponent = ({ children }) => {
 };
 
 const Image: React.FC<ImageProps> = ({ src, alt, className, ...props }) => {
-  const { isLoaded, hasError, setIsLoaded, setHasError, setIsLoading } =
+  const { isLoaded, hasError, setIsLoaded, setHasError } =
     useContext(AvatarContext);
-
-  const handleLoad = () => {
-    setIsLoaded(true);
-    setIsLoading(false);
-  };
-
-  const handleError = () => {
-    setHasError(true);
-    setIsLoading(false);
-  };
 
   return (
     <>
@@ -51,8 +38,8 @@ const Image: React.FC<ImageProps> = ({ src, alt, className, ...props }) => {
           alt={alt}
           {...props}
           style={{ display: isLoaded ? "block" : "none" }}
-          onLoad={handleLoad}
-          onError={handleError}
+          onLoad={() => setIsLoaded(true)}
+          onError={() => setHasError(true)}
           className={cn("size-10 rounded-full", className)}
         />
       )}
@@ -61,11 +48,11 @@ const Image: React.FC<ImageProps> = ({ src, alt, className, ...props }) => {
 };
 
 const Fallback: React.FC<FallbackProps> = ({ children }) => {
-  const { hasError, isLoading } = useContext(AvatarContext);
+  const { hasError, isLoaded } = useContext(AvatarContext);
 
   return (
     <>
-      {(isLoading || hasError) && (
+      {(!isLoaded || hasError) && (
         <div className="bg-gray-300 text-white rounded-full w-10 h-10 flex items-center justify-center">
           {children}
         </div>

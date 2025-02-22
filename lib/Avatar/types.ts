@@ -11,8 +11,6 @@ interface AvatarType {
   setIsLoaded: Dispatch<SetStateAction<boolean>>;
   hasError: boolean;
   setHasError: Dispatch<SetStateAction<boolean>>;
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 type AvatarComponent = React.FC<AvatarProps> & {

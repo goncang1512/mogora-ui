@@ -37,6 +37,30 @@ export const Default: Story = {
           <p>Content for section 2</p>
         </Accordion.Content>
       </Accordion.Item>
+      <Accordion.Item value="item3">
+        <Accordion.Trigger>Section 3</Accordion.Trigger>
+        <Accordion.Content>
+          <p>Content for section 2</p>
+        </Accordion.Content>
+        <Accordion.Content>
+          <p>Content for section 2</p>
+        </Accordion.Content>
+        <Accordion.Content>
+          <p>Content for section 2</p>
+        </Accordion.Content>
+      </Accordion.Item>
+      <Accordion.Item value="item4">
+        <Accordion.Trigger>Section 4</Accordion.Trigger>
+        <Accordion.Content>
+          <p>Content for section 2</p>
+        </Accordion.Content>
+        <Accordion.Content>
+          <p>Content for section 2</p>
+        </Accordion.Content>
+        <Accordion.Content>
+          <p>Content for section 2</p>
+        </Accordion.Content>
+      </Accordion.Item>
     </Accordion>
   ),
 };
