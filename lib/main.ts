@@ -14,4 +14,5 @@ export { Sheet } from "./Sheet/Sheet";
 export { Avatar } from "./Avatar/Avatar";
 export { Badge } from "./Badge/Badge";
 export { Table } from "./Table/Table";
+export { Tabs } from "./Tabs/Tabs";
 export { useClickOutside } from "./utils/clickoutside";
