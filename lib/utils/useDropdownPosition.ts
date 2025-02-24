@@ -1,4 +1,4 @@
-import { useState, useEffect, RefObject } from "react";
+import { useState, useEffect, useCallback, RefObject } from "react";
 import { Position } from "./type";
 
 export function useDropdownPosition(
@@ -8,61 +8,48 @@ export function useDropdownPosition(
 ) {
   const [position, setPosition] = useState(defaultPosition);
 
-  useEffect(() => {
-    if (!targetRef.current || !isOpen) return;
+  const updatePosition = useCallback(() => {
+    if (!targetRef.current) return;
 
     const target = targetRef.current;
-    const updatePosition = () => {
-      if (!target) return;
+    const rect = target.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
 
-      const rect = target.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const windowWidth = window.innerWidth;
+    let newPosition: Position = position;
 
-      // Toleransi jarak dari batas viewport (dalam piksel)
-      const tolerance = 0;
+    if (
+      position === "bottom" &&
+      rect.bottom + target.offsetHeight > windowHeight
+    ) {
+      newPosition = "top";
+    } else if (position === "top" && rect.top - target.offsetHeight < 0) {
+      newPosition = "bottom";
+    } else if (position === "left" && rect.left - target.offsetWidth < 0) {
+      newPosition = "right";
+    } else if (
+      position === "right" &&
+      rect.right + target.offsetWidth > windowWidth
+    ) {
+      newPosition = "left";
+    }
 
-      let newPosition = position;
+    setPosition((prev) => (prev !== newPosition ? newPosition : prev));
+  }, [targetRef, position]);
 
-      // Jika posisi saat ini adalah bottom
-      if (position === "bottom") {
-        // Jika tidak ada cukup ruang di bawah, ubah ke top
-        if (rect.bottom + target.offsetHeight > windowHeight - tolerance) {
-          newPosition = "top";
-        }
-      }
-      // Jika posisi saat ini adalah top
-      else if (position === "top") {
-        // Jika tidak ada cukup ruang di atas, ubah kembali ke bottom
-        if (rect.top - target.offsetHeight < tolerance) {
-          newPosition = "bottom";
-        }
-      }
-      // Jika posisi saat ini adalah left
-      else if (position === "left") {
-        if (rect.left - target.offsetWidth < tolerance) {
-          newPosition = "right";
-        }
-      }
-      // Jika posisi saat ini adalah left
-      else if (position === "right") {
-        if (rect.right + target.offsetWidth > windowWidth - tolerance) {
-          newPosition = "left";
-        }
-      }
-
-      setPosition(newPosition);
-    };
+  useEffect(() => {
+    if (!isOpen) return;
 
     updatePosition();
 
-    const handleScroll = () => requestAnimationFrame(updatePosition);
-    window.addEventListener("scroll", handleScroll, true);
+    window.addEventListener("scroll", updatePosition, true);
+    window.addEventListener("resize", updatePosition);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll, true);
+      window.removeEventListener("scroll", updatePosition, true);
+      window.removeEventListener("resize", updatePosition);
     };
-  }, [targetRef, isOpen, position]);
+  }, [isOpen, updatePosition]);
 
   return { position };
 }

@@ -15,12 +15,16 @@ export const Tabs: TabsComponent = ({
   children,
   defaultValue = "",
   variant,
+  className,
   size,
+  ...props
 }) => {
   const [active, setActive] = useState(defaultValue ?? "");
   return (
     <TabsContext.Provider value={{ active, setActive, variant, size }}>
-      {children}
+      <div className={cn("flex flex-col gap-3", className)} {...props}>
+        {children}
+      </div>
     </TabsContext.Provider>
   );
 };

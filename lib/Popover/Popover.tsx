@@ -17,7 +17,11 @@ import {
 
 const PopoverContext = createContext<PopoverType>({} as PopoverType);
 
-export const Popover: PopoverComponent = ({ children, ...props }) => {
+export const Popover: PopoverComponent = ({
+  children,
+  className,
+  ...props
+}) => {
   const [seeContent, setSeeContent] = useState(false);
   const buttonTrigger = useRef<HTMLDivElement | null>(null);
 
@@ -29,9 +33,9 @@ export const Popover: PopoverComponent = ({ children, ...props }) => {
         buttonTrigger,
       }}
     >
-      <span className={cn("relative")} {...props}>
+      <div className={cn("relative inline", className)} {...props}>
         {children}
-      </span>
+      </div>
     </PopoverContext.Provider>
   );
 };
@@ -46,14 +50,14 @@ const Trigger: React.FC<TriggerProps> = ({
     useContext(PopoverContext);
 
   return (
-    <span
+    <div
       ref={buttonTrigger}
       onClick={() => setSeeContent(!seeContent)}
-      className={cn("cursor-pointer", className)}
+      className={cn("cursor-pointer inline", className)}
       {...props}
     >
       {children}
-    </span>
+    </div>
   );
 };
 

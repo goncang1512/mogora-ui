@@ -1,45 +1,21 @@
 import React, {
   ReactNode,
-  HTMLAttributes,
-  LiHTMLAttributes,
   createContext,
   useState,
-  Dispatch,
-  SetStateAction,
   useContext,
   useRef,
-  RefObject,
   useEffect,
 } from "react";
 import { cn } from "../utils/utils";
-import { VariantProps } from "class-variance-authority";
-import { buttonVariants } from "../Button/variants";
 import { useClickOutside } from "../utils/clickoutside";
 import { useDropdownPosition } from "../utils/useDropdownPosition";
-
-interface SelectProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-  name?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-type SelectComponent = React.FC<SelectProps> & {
-  Trigger: React.FC<TriggerProps>;
-  Content: React.FC<ContentProps>;
-  Item: React.FC<ItemProps>;
-};
-
-interface SelectType {
-  seeOption: boolean;
-  setSeeOption: Dispatch<SetStateAction<boolean>>;
-  valueOnChange: string;
-  setOnChange: Dispatch<SetStateAction<string>>;
-  buttonTrigger: RefObject<HTMLDivElement | null>;
-  handleChange: (newValue: string) => void;
-  options: string;
-  setOptions: Dispatch<SetStateAction<string>>;
-}
+import {
+  ContentProps,
+  ItemProps,
+  TriggerProps,
+  SelectType,
+  SelectComponent,
+} from "./types";
 
 const SelectContext = createContext<SelectType>({} as SelectType);
 
@@ -52,7 +28,7 @@ export const Select: SelectComponent = ({
   ...props
 }): ReactNode => {
   const [seeOption, setSeeOption] = useState(false);
-  const buttonTrigger = useRef<HTMLDivElement | null>(null);
+  const buttonTrigger = useRef<HTMLButtonElement | null>(null);
   const [valueOnChange, setOnChange] = useState(value ?? "");
   const [options, setOptions] = useState("");
 
@@ -91,18 +67,12 @@ export const Select: SelectComponent = ({
         readOnly
         hidden
       />
-      <div className={cn("relative", className)} {...props}>
+      <div className={cn("relative inline-flex w-full", className)} {...props}>
         {children}
       </div>
     </SelectContext.Provider>
   );
 };
-
-interface TriggerProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof buttonVariants> {
-  children: ReactNode;
-}
 
 const Trigger: React.FC<TriggerProps> = ({
   children,
@@ -112,21 +82,19 @@ const Trigger: React.FC<TriggerProps> = ({
   const { seeOption, setSeeOption, options, buttonTrigger } =
     useContext(SelectContext);
   return (
-    <div
+    <button
       ref={buttonTrigger}
       onClick={() => setSeeOption(!seeOption)}
-      className={cn("", className)}
+      className={cn(
+        "border px-3 py-1 rounded-md border-gray-300 w-full text-start",
+        className
+      )}
       {...props}
     >
       {options ? options : children}
-    </div>
+    </button>
   );
 };
-
-interface ItemProps extends LiHTMLAttributes<HTMLLIElement> {
-  children: string;
-  value: string;
-}
 
 const Item: React.FC<ItemProps> = ({
   children,
@@ -152,10 +120,6 @@ const Item: React.FC<ItemProps> = ({
     </li>
   );
 };
-
-interface ContentProps extends HTMLAttributes<HTMLUListElement> {
-  children: ReactNode;
-}
 
 const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
   const { seeOption, setSeeOption, buttonTrigger } = useContext(SelectContext);
