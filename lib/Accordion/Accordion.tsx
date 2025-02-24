@@ -16,7 +16,7 @@ export const Accordion: AccordionComponent = ({ children }): ReactNode => {
 
   return (
     <AccordionContext.Provider value={{ valueItem, setValueItem }}>
-      <div>{children}</div>
+      {children}
     </AccordionContext.Provider>
   );
 };
