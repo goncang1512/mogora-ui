@@ -127,14 +127,16 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
   useClickOutside([ulRef, buttonTrigger], () => setSeeOption(false));
   const { position } = useDropdownPosition(ulRef, seeOption, "bottom");
 
+  console.log(position);
+
   if (seeOption) {
     return (
       <ul
         ref={ulRef}
         className={cn(
           "border border-gray-200 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
-          position === "top" ? "bottom-full" : "",
-          position === "bottom" ? "top-full" : "",
+          position === "top" && "bottom-full left-0 w-full", // Dropdown muncul di atas
+          position === "bottom" && "top-full left-0 w-full", // Dropdown muncul di bawah
           className
         )}
         {...props}
