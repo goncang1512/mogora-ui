@@ -11,12 +11,18 @@ import { ChevronDown } from "lucide-react";
 
 const AccordionContext = createContext<AccordionType>({} as AccordionType);
 
-export const Accordion: AccordionComponent = ({ children }): ReactNode => {
+export const Accordion: AccordionComponent = ({
+  children,
+  className,
+  ...props
+}): ReactNode => {
   const [valueItem, setValueItem] = useState<number | string | null>(null);
 
   return (
     <AccordionContext.Provider value={{ valueItem, setValueItem }}>
-      {children}
+      <div className={cn("w-full flex flex-col", className)} {...props}>
+        {children}
+      </div>
     </AccordionContext.Provider>
   );
 };
