@@ -54,7 +54,7 @@ const Content: React.FC<ContentProps> = ({
     <div
       data-state={onShow ? "open" : "closed"}
       className={cn(
-        "fixed inset-0 flex items-center justify-center bg-black/80 transition-opacity w-screen ease-linear duration-100",
+        "fixed inset-0 flex items-center justify-center bg-black/80 transition-opacity w-screen ease-linear duration-100 z-[9999]",
         "data-[state=open]:opacity-100 data-[state=open]:pointer-events-auto data-[state=closed]:pointer-events-none data-[state=closed]:opacity-0",
         classSheet
       )}
