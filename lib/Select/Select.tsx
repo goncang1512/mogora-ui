@@ -16,6 +16,7 @@ import {
   SelectType,
   SelectComponent,
 } from "./types";
+import { ChevronDown } from "lucide-react";
 
 const SelectContext = createContext<SelectType>({} as SelectType);
 
@@ -77,6 +78,7 @@ export const Select: SelectComponent = ({
 const Trigger: React.FC<TriggerProps> = ({
   children,
   className,
+  icon,
   ...props
 }): ReactNode => {
   const { seeOption, setSeeOption, options, buttonTrigger } =
@@ -87,12 +89,17 @@ const Trigger: React.FC<TriggerProps> = ({
       ref={buttonTrigger}
       onClick={() => setSeeOption(!seeOption)}
       className={cn(
-        "border px-3 py-1 rounded-md border-gray-300 w-full text-start cursor-pointer",
+        "border px-3 py-1 rounded-md border-gray-300 w-full text-start cursor-pointer flex justify-between items-center",
         className
       )}
       {...props}
     >
       {options ? options : children}
+      {icon !== false && (
+        <span className={`${seeOption && "rotate-180"} duration-150`}>
+          {icon ?? <ChevronDown />}
+        </span>
+      )}
     </div>
   );
 };

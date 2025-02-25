@@ -37,6 +37,7 @@ interface TriggerProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof buttonVariants> {
   children: ReactNode;
+  icon?: ReactNode | boolean;
 }
 
 interface ItemProps extends LiHTMLAttributes<HTMLLIElement> {
