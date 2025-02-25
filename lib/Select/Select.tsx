@@ -28,9 +28,9 @@ export const Select: SelectComponent = ({
   ...props
 }): ReactNode => {
   const [seeOption, setSeeOption] = useState(false);
-  const buttonTrigger = useRef<HTMLButtonElement | null>(null);
+  const buttonTrigger = useRef<HTMLDivElement | null>(null);
   const [valueOnChange, setOnChange] = useState(value ?? "");
-  const [options, setOptions] = useState("");
+  const [options, setOptions] = useState<React.ReactNode | null>(null);
 
   useEffect(() => {
     if (value !== undefined) {
@@ -81,18 +81,19 @@ const Trigger: React.FC<TriggerProps> = ({
 }): ReactNode => {
   const { seeOption, setSeeOption, options, buttonTrigger } =
     useContext(SelectContext);
+
   return (
-    <button
+    <div
       ref={buttonTrigger}
       onClick={() => setSeeOption(!seeOption)}
       className={cn(
-        "border px-3 py-1 rounded-md border-gray-300 w-full text-start",
+        "border px-3 py-1 rounded-md border-gray-300 w-full text-start cursor-pointer",
         className
       )}
       {...props}
     >
       {options ? options : children}
-    </button>
+    </div>
   );
 };
 
@@ -100,16 +101,22 @@ const Item: React.FC<ItemProps> = ({
   children,
   value,
   className,
+  onClick,
   ...props
 }) => {
   const { handleChange, setSeeOption, setOptions } = useContext(SelectContext);
+  const handleClick = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    handleChange(value);
+    setOptions(children);
+    setSeeOption(false);
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <li
-      onClick={() => {
-        handleChange(value);
-        setSeeOption(false);
-        setOptions(children);
-      }}
+      onClick={handleClick}
       className={cn(
         "list-none cursor-pointer hover:bg-gray-300 px-2 py-1 rounded-md",
         className
@@ -127,24 +134,22 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
   useClickOutside([ulRef, buttonTrigger], () => setSeeOption(false));
   const { position } = useDropdownPosition(ulRef, seeOption, "bottom");
 
-  console.log(position);
+  if (!seeOption) return null;
 
-  if (seeOption) {
-    return (
-      <ul
-        ref={ulRef}
-        className={cn(
-          "border border-gray-200 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
-          position === "top" && "bottom-full left-0 w-full", // Dropdown muncul di atas
-          position === "bottom" && "top-full left-0 w-full", // Dropdown muncul di bawah
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </ul>
-    );
-  }
+  return (
+    <ul
+      ref={ulRef}
+      className={cn(
+        "border border-gray-200 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200 w-full",
+        position === "top" && "bottom-full left-0 w-full", // Dropdown muncul di atas
+        position === "bottom" && "top-full left-0 w-full", // Dropdown muncul di bawah
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </ul>
+  );
 };
 
 Select.Trigger = Trigger;

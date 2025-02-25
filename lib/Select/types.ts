@@ -5,7 +5,6 @@ import React, {
   Dispatch,
   SetStateAction,
   RefObject,
-  ButtonHTMLAttributes,
 } from "react";
 import { VariantProps } from "class-variance-authority";
 import { buttonVariants } from "../Button/variants";
@@ -28,14 +27,14 @@ interface SelectType {
   setSeeOption: Dispatch<SetStateAction<boolean>>;
   valueOnChange: string;
   setOnChange: Dispatch<SetStateAction<string>>;
-  buttonTrigger: RefObject<HTMLButtonElement | null>;
+  buttonTrigger: RefObject<HTMLDivElement | null>;
   handleChange: (newValue: string) => void;
-  options: string;
-  setOptions: Dispatch<SetStateAction<string>>;
+  options: ReactNode;
+  setOptions: Dispatch<SetStateAction<ReactNode>>;
 }
 
 interface TriggerProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
+  extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof buttonVariants> {
   children: ReactNode;
 }
