@@ -1,6 +1,6 @@
 {
   "name": "mogora-ui",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "type": "module",
   "files": [
     "dist",
@@ -27,7 +27,7 @@
     "prebuild": "rm -rf dist",
     "lint": "eslint .",
     "preview": "vite preview",
-    "publish": "npm run build && npm publish",
+    "publish": "npm publish",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

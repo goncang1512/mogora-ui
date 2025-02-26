@@ -31,10 +31,6 @@ interface TableProps
   children: ReactNode;
 }
 
-interface HeaderProps {
-  children: ReactNode;
-}
-
 interface RowProps
   extends VariantProps<typeof rowVariants>,
     HTMLAttributes<HTMLTableRowElement> {}
@@ -43,7 +39,11 @@ interface TableHeaderProps extends ThHTMLAttributes<HTMLTableCellElement> {}
 
 interface TableCellProps extends TdHTMLAttributes<HTMLTableCellElement> {}
 
-interface BodyProps {
+interface BodyProps extends HTMLAttributes<HTMLTableSectionElement> {
+  children: ReactNode;
+}
+
+interface HeaderProps extends HTMLAttributes<HTMLTableSectionElement> {
   children: ReactNode;
 }
 

@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from "react";
 import {
   BodyProps,
+  HeaderProps,
   RowProps,
   TableCellProps,
   TableComponent,
@@ -63,12 +64,12 @@ const Cell: React.FC<TableCellProps> = ({ children, className, ...props }) => {
   );
 };
 
-const Body: React.FC<BodyProps> = ({ children }) => {
-  return <>{children}</>;
+const Body: React.FC<BodyProps> = ({ children, ...props }) => {
+  return <tbody {...props}>{children}</tbody>;
 };
 
-const Header: React.FC<BodyProps> = ({ children }) => {
-  return <>{children}</>;
+const Header: React.FC<HeaderProps> = ({ children, ...props }) => {
+  return <thead {...props}>{children}</thead>;
 };
 
 Table.Header = Header;
