@@ -46,3 +46,8 @@ export const Default = Template.bind({});
 Default.args = {
   variant: "default",
 };
+
+export const Box = Template.bind({});
+Box.args = {
+  variant: "bordered",
+};

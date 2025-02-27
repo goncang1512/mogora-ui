@@ -9,7 +9,14 @@ import {
   TableType,
 } from "./types";
 import { cn } from "../utils/utils";
-import { rowVariants, tableVariants } from "./Table.variants";
+import {
+  bodyVariant,
+  cellVariants,
+  headerCellVariant,
+  headerVariant,
+  rowVariants,
+  tableVariants,
+} from "./Table.variants";
 
 const TableContext = createContext<TableType>({} as TableType);
 
@@ -23,7 +30,10 @@ export const Table: TableComponent = ({
   return (
     <TableContext.Provider value={{ variant, size }}>
       <table
-        className={cn(tableVariants({ variant, size, className }))}
+        className={cn(
+          tableVariants({ variant, size, className }),
+          "overflow-hidden"
+        )}
         {...props}
       >
         {children}
@@ -46,9 +56,11 @@ const HeaderCell: React.FC<TableHeaderProps> = ({
   className,
   ...props
 }) => {
+  const { variant, size } = useContext(TableContext);
+
   return (
     <th
-      className={cn("font-medium text-start px-2 py-2", className)}
+      className={cn(headerCellVariant({ variant, size, className }))}
       {...props}
     >
       {children}
@@ -57,19 +69,38 @@ const HeaderCell: React.FC<TableHeaderProps> = ({
 };
 
 const Cell: React.FC<TableCellProps> = ({ children, className, ...props }) => {
+  const { variant, size } = useContext(TableContext);
   return (
-    <td className={cn("text-start py-2 px-2 ", className)} {...props}>
+    <td className={cn(cellVariants({ variant, size, className }))} {...props}>
       {children}
     </td>
   );
 };
 
-const Body: React.FC<BodyProps> = ({ children, ...props }) => {
-  return <tbody {...props}>{children}</tbody>;
+const Body: React.FC<BodyProps> = ({ children, className, ...props }) => {
+  const { variant, size } = useContext(TableContext);
+
+  return (
+    <tbody className={cn(bodyVariant({ variant, size, className }))} {...props}>
+      {children}
+    </tbody>
+  );
 };
 
-const Header: React.FC<HeaderProps> = ({ children, ...props }) => {
-  return <thead {...props}>{children}</thead>;
+const Header: React.FC<HeaderProps> = ({ children, className, ...props }) => {
+  const { variant, size } = useContext(TableContext);
+
+  return (
+    <thead
+      className={cn(
+        headerVariant({ variant, size, className }),
+        "overflow-hidden"
+      )}
+      {...props}
+    >
+      {children}
+    </thead>
+  );
 };
 
 Table.Header = Header;

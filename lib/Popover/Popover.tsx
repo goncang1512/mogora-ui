@@ -33,7 +33,7 @@ export const Popover: PopoverComponent = ({
         buttonTrigger,
       }}
     >
-      <div className={cn("relative inline", className)} {...props}>
+      <div className={cn("relative inline-flex", className)} {...props}>
         {children}
       </div>
     </PopoverContext.Provider>

@@ -27,13 +27,17 @@ export const Sheet: SheetComponent = ({
   );
 };
 
-const Trigger: React.FC<TriggerProps> = ({ children, ...props }) => {
+const Trigger: React.FC<TriggerProps> = ({ children, className, ...props }) => {
   const { onShow, setOnShow } = useContext(SheetContext);
 
   return (
-    <span onClick={() => setOnShow(!onShow)} {...props}>
+    <div
+      className={cn("inline-flex", className)}
+      onClick={() => setOnShow(!onShow)}
+      {...props}
+    >
       {children}
-    </span>
+    </div>
   );
 };
 

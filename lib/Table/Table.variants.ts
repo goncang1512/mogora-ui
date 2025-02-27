@@ -1,6 +1,6 @@
 import { cva } from "class-variance-authority";
 
-const variantKeys = ["default", "zebra"] as const;
+const variantKeys = ["default", "zebra", "bordered"] as const;
 const sizeKeys = ["default", "normal"] as const;
 
 const createVariant = (values: Record<(typeof variantKeys)[number], string>) =>
@@ -13,6 +13,8 @@ const tableVariants = cva("w-full font-poppins", {
     variant: createVariant({
       default: "",
       zebra: "",
+      bordered:
+        "border-separate border  border-gray-300 rounded-lg border-spacing-0",
     }),
     size: createSize({
       default: "",
@@ -31,6 +33,7 @@ const rowVariants = cva("", {
       default:
         "text-start border-gray-300  hover:bg-slate-100 duration-100 border-b",
       zebra: "odd:bg-white even:bg-gray-100 hover:bg-gray-200",
+      bordered: "",
     }),
     size: createSize({
       default: "px-2",
@@ -43,4 +46,83 @@ const rowVariants = cva("", {
   },
 });
 
-export { tableVariants, rowVariants };
+const cellVariants = cva("text-start py-2 px-2 ", {
+  variants: {
+    variant: createVariant({
+      default: "",
+      zebra: "",
+      bordered: "border-t border-r border-gray-300 last:border-r-0",
+    }),
+    size: createSize({
+      default: "px-2",
+      normal: "",
+    }),
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
+
+const headerCellVariant = cva("font-medium text-start px-2 py-2", {
+  variants: {
+    variant: createVariant({
+      default: "",
+      zebra: "",
+      bordered: "border-r border-gray-300 last:border-r-0",
+    }),
+    size: createSize({
+      default: "px-2",
+      normal: "",
+    }),
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
+
+const headerVariant = cva("font-medium text-start px-2 py-2 bg-transparent", {
+  variants: {
+    variant: createVariant({
+      default: "",
+      zebra: "",
+      bordered: "bg-gray-200 border-b",
+    }),
+    size: createSize({
+      default: "px-2",
+      normal: "",
+    }),
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
+
+const bodyVariant = cva("bg-transparent", {
+  variants: {
+    variant: createVariant({
+      default: "",
+      zebra: "",
+      bordered: "overflow-hidden rounded-b-lg",
+    }),
+    size: createSize({
+      default: "px-2",
+      normal: "",
+    }),
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
+
+export {
+  tableVariants,
+  rowVariants,
+  cellVariants,
+  headerCellVariant,
+  headerVariant,
+  bodyVariant,
+};

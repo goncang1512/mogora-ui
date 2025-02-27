@@ -18,7 +18,7 @@ interface SheetProps extends HTMLAttributes<HTMLDivElement> {
   onOpenChange?: (open: boolean) => void;
 }
 
-interface TriggerProps extends HTMLAttributes<HTMLSpanElement> {
+interface TriggerProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
