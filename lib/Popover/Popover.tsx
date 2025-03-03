@@ -72,15 +72,24 @@ const Content: React.FC<ContentProps> = ({
   const divRef = useRef<HTMLDivElement>(null);
   useClickOutside([divRef, buttonTrigger], () => setSeeContent(false));
   const { position } = useDropdownPosition(divRef, seeContent, align);
+  const { position: alignPosition } = useDropdownPosition(
+    divRef,
+    seeContent,
+    "bottom"
+  );
+
+  console.log({ position, alignPosition });
 
   if (seeContent) {
     return (
       <div
         ref={divRef}
         className={cn(
-          "z-30 overflow-visible border border-gray-200 top-1 p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200",
-          position === "left" ? "right-[97%]" : "",
-          position === "right" ? "left-[97%]" : "",
+          "z-30 overflow-visible border border-gray-200 w-xs p-2 rounded-md absolute bg-white dark:bg-slate-900 text-black dark:text-slate-200",
+          position === "left" ? "right-[70%]" : "",
+          position === "right" ? "left-[70%]" : "",
+          alignPosition === "top" ? "bottom-full" : "",
+          alignPosition === "bottom" ? "top-full" : "",
           className
         )}
         {...props}

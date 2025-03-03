@@ -9,7 +9,7 @@ const meta: Meta<typeof Badge> = {
       control: {
         type: "select",
       },
-      options: ["default", "secondary", "destructive", "outline"],
+      options: ["default", "secondary", "outline"],
     },
     className: {
       control: "text",
@@ -36,13 +36,6 @@ export const Secondary: Story = {
   args: {
     variant: "secondary",
     children: "Secondary Badge",
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: "destructive",
-    children: "Destructive Badge",
   },
 };
 
