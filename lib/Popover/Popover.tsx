@@ -78,8 +78,6 @@ const Content: React.FC<ContentProps> = ({
     "bottom"
   );
 
-  console.log({ position, alignPosition });
-
   if (seeContent) {
     return (
       <div
