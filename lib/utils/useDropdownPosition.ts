@@ -50,17 +50,23 @@ export function useDropdownPosition(
       }
 
       // Jika posisi berlawanan juga tidak cukup, cari posisi dengan ruang terbanyak
-      if (
-        (newPosition === "bottom" && spaceBottom < rect.height) ||
-        (newPosition === "top" && spaceTop < rect.height) ||
-        (newPosition === "left" && spaceLeft < rect.width) ||
-        (newPosition === "right" && spaceRight < rect.width)
-      ) {
-        const maxSpace = Math.max(spaceBottom, spaceTop, spaceRight, spaceLeft);
-        if (maxSpace === spaceBottom) newPosition = "bottom";
-        else if (maxSpace === spaceTop) newPosition = "top";
-        else if (maxSpace === spaceRight) newPosition = "right";
-        else if (maxSpace === spaceLeft) newPosition = "left";
+      const maxSpace = Math.max(spaceBottom, spaceTop, spaceRight, spaceLeft);
+      if (defaultPosition === "bottom" || defaultPosition === "top") {
+        if (
+          (newPosition === "bottom" && spaceBottom < rect.height) ||
+          (newPosition === "top" && spaceTop < rect.height)
+        ) {
+          if (maxSpace === spaceBottom) newPosition = "bottom";
+          else if (maxSpace === spaceTop) newPosition = "top";
+        }
+      } else if (defaultPosition === "right" || defaultPosition === "left") {
+        if (
+          (newPosition === "right" && spaceRight < rect.width) ||
+          (newPosition === "left" && spaceLeft < rect.width)
+        ) {
+          if (maxSpace === spaceRight) newPosition = "right";
+          else if (maxSpace === spaceLeft) newPosition = "left";
+        }
       }
 
       // Update posisi jika berubah
