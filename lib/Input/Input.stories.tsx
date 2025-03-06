@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { Input } from "./Input";
+import { Label } from "../Label/Label";
 
 const meta: Meta<typeof Input> = {
   title: "Components/Input",
@@ -39,4 +40,34 @@ export const Underline: Story = {
     size: "small",
     theme: "success",
   },
+};
+
+const Template: StoryFn = (args) => {
+  return (
+    <div className="relative flex flex-col gap-2 w-sm">
+      <Input
+        theme={"primary"}
+        id="username"
+        name="username"
+        variant={args.variant}
+        placeholder=" "
+        className="peer"
+      />
+      <Label htmlFor="username" className={args.classFloat}>
+        Username
+      </Label>
+    </div>
+  );
+};
+
+export const FloatDefault = Template.bind({});
+FloatDefault.args = {
+  variant: "default",
+  classFloat: "float-[default]",
+};
+
+export const FloatUnderline = Template.bind({});
+FloatUnderline.args = {
+  variant: "underline",
+  classFloat: "float-[underline]",
 };
