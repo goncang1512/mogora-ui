@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { ContentProps, SheetComponent, TriggerProps, SheetType } from "./types";
 import useOpenChange from "../utils/openState";
 import { cn } from "../utils/utils";
@@ -13,6 +13,19 @@ export const Sheet: SheetComponent = ({
   ...props
 }) => {
   const { isOpen, toggleOpen } = useOpenChange(open, onOpenChange);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
+
   return (
     <SheetContext.Provider
       value={{

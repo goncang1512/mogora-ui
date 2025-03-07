@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { TriggerProps, ContentProps, ModalComponent, ModalType } from "./types";
 import { cn } from "../utils/utils";
 import useOpenChange from "../utils/openState";
@@ -13,6 +13,17 @@ export const Modal: ModalComponent = ({
   ...props
 }) => {
   const { isOpen, toggleOpen } = useOpenChange(open, onOpenChange);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isOpen]);
 
   return (
     <ModalContext.Provider

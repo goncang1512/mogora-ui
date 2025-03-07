@@ -15,5 +15,6 @@ export { Avatar } from "./Avatar/Avatar";
 export { Badge } from "./Badge/Badge";
 export { Table } from "./Table/Table";
 export { Tabs } from "./Tabs/Tabs";
+export { Drawer } from "./Drawer/Drawer";
 export { cn as twClass } from "./utils/utils";
 export { useClickOutside } from "./utils/clickoutside";

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import {
   ContentProps,
   DrawerComponent,
@@ -22,6 +22,18 @@ export const Drawer: DrawerComponent = ({
     onOpen,
     onOpenChange
   );
+
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [open]);
 
   return (
     <DrawerContext.Provider
@@ -84,7 +96,7 @@ const Content: React.FC<ContentProps> = ({
         }, 50);
       }}
       className={cn(
-        "fixed inset-0 flex items-center justify-center bg-black/70 transition-opacity w-screen ease-linear duration-100 z-[9999]",
+        "fixed inset-0 flex items-center justify-center bg-black/70 transition-opacity w-screen ease-linear duration-100 z-[9999] overflow-hidden",
         "data-[state=open]:opacity-100 data-[state=open]:pointer-events-auto",
         "data-[state=closed]:pointer-events-none data-[state=closed]:opacity-0",
         classDrawer
