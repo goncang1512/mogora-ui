@@ -12,7 +12,7 @@
 
 ## 📖 Documentation
 
-For full documentation, visit: **[https://mogora-web.vercel.app/](#)**
+For full documentation, visit: **[mogora-ui Documentation](https://mogora-web.vercel.app)**
 
 ## 🚀 Installation
 
