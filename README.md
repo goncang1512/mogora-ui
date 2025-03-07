@@ -1,17 +1,18 @@
 # mogora-ui
 
-**mogora-ui** is a simple and customizable UI component library built with modern web technologies. Designed to be lightweight and flexible, it helps developers create attractive interfaces efficiently.
+**mogora-ui** is a simple and flexible UI component library for **React 19**, built with **Tailwind CSS v4** for styling and **lucide-react** for icons. Each component is fully customizable, allowing users to style it as needed for better flexibility.
 
 ## 📌 Features
 
-- 🚀 **Lightweight & Fast** – Optimized for performance.
-- 🎨 **Customizable** – Easily adjust styles using utility classes.
-- 📦 **Component-Based** – Ready-to-use UI components for faster development.
-- 🛠 **No Extra Dependencies** – Built with only essential tools.
+- 🚀 **Optimized for React 19** – Built for the latest React version.
+- 🎨 **Tailwind CSS v4 Support** – Easily customizable with utility classes.
+- 🔗 **lucide-react Icons** – Lightweight and modern icon set.
+- 📦 **Component-Based** – Ready-to-use components for faster development.
+- 🛠 **Fully Customizable** – Every component can be styled by users for maximum flexibility.
 
 ## 📖 Documentation
 
-For full documentation, visit: **[mogora-ui Documentation](#)**
+For full documentation, visit: **[https://mogora-web.vercel.app/](#)**
 
 ## 🚀 Installation
 
