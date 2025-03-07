@@ -78,10 +78,8 @@ const Content: React.FC<ContentProps> = ({
 }) => {
   const { drawerProps, open, setOpenChange, classDrawer } =
     useContext(DrawerContext);
-  const { drawerRef, handleMouseDown, dragEnded } = useDraggableDrawer(
-    open,
-    setOpenChange
-  );
+  const { drawerRef, handleMouseDown, handleTouchStart, dragEnded } =
+    useDraggableDrawer(open, setOpenChange);
 
   return (
     <div
@@ -108,7 +106,7 @@ const Content: React.FC<ContentProps> = ({
         onClick={(e) => e.stopPropagation()}
         data-state={open ? "open" : "closed"}
         className={cn(
-          "absolute z-50 w-full h-[70vh] bg-white md:px-6 px-3 md:pb-6 pb-3 pt-3 shadow-lg bottom-0 flex flex-col rounded-t-lg items-center",
+          "absolute z-50 w-full md:h-[70vh] h-[80vh] bg-white md:px-6 px-3 md:pb-6 pb-3 pt-3 shadow-lg bottom-0 flex flex-col rounded-t-lg items-center",
           "transition-transform ease-in-out duration-300 will-change-transform",
           "data-[state=closed]:translate-y-full",
           "data-[state=open]:translate-y-0",
@@ -117,13 +115,14 @@ const Content: React.FC<ContentProps> = ({
         {...props}
       >
         <button
-          className="flex justify-center cursor-default"
+          className="flex justify-center cursor-default w-full"
           onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
         >
           {render ? (
             render()
           ) : (
-            <div className="h-2 bg-gray-300 rounded-lg w-[15vh] self-center"></div>
+            <div className="h-1.5 bg-gray-300 rounded-lg w-[15vh] self-center"></div>
           )}
         </button>
         {children}

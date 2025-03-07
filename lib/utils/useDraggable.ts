@@ -14,20 +14,28 @@ const useDraggableDrawer = (
   // Gunakan useState untuk memicu re-render
   const [draggingState, setDraggingState] = useState(false);
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
-    startY.current = e.clientY;
+  // Fungsi untuk memulai drag (Mouse & Touch)
+  const handleStart = (
+    e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>
+  ) => {
+    startY.current = "touches" in e ? e.touches[0].clientY : e.clientY;
     isDragging.current = false;
     dragEnded.current = false;
     setDraggingState(false);
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMove);
+    document.addEventListener("mouseup", handleEnd);
+    document.addEventListener("touchmove", handleMove);
+    document.addEventListener("touchend", handleEnd);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
+  // Fungsi untuk menangani pergerakan drag (Mouse & Touch)
+  const handleMove = (e: MouseEvent | TouchEvent) => {
     if (!startY.current) return;
 
-    const deltaY = e.clientY - startY.current;
+    const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
+    const deltaY = clientY - startY.current;
+
     if (deltaY > 5) {
       isDragging.current = true;
       translateY.current = deltaY;
@@ -45,7 +53,8 @@ const useDraggableDrawer = (
     }
   };
 
-  const handleMouseUp = () => {
+  // Fungsi untuk menyelesaikan drag (Mouse & Touch)
+  const handleEnd = () => {
     if (isDragging.current && translateY.current >= 100) {
       setOpenChange(false);
     } else {
@@ -57,12 +66,13 @@ const useDraggableDrawer = (
     dragEnded.current = true;
     isDragging.current = false;
     setDraggingState(false);
-
     startY.current = null;
     translateY.current = 0;
 
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
+    document.removeEventListener("mousemove", handleMove);
+    document.removeEventListener("mouseup", handleEnd);
+    document.removeEventListener("touchmove", handleMove);
+    document.removeEventListener("touchend", handleEnd);
   };
 
   useEffect(() => {
@@ -78,7 +88,12 @@ const useDraggableDrawer = (
     }
   }, [open, draggingState]);
 
-  return { drawerRef, handleMouseDown, dragEnded };
+  return {
+    drawerRef,
+    handleMouseDown: handleStart,
+    handleTouchStart: handleStart,
+    dragEnded,
+  };
 };
 
 export default useDraggableDrawer;
