@@ -25,6 +25,7 @@ interface TriggerProps extends HTMLAttributes<HTMLDivElement> {
 
 interface ContentProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
+  render?: () => ReactNode;
 }
 
 export type { DrawerType, DrawerComponent, TriggerProps, ContentProps };

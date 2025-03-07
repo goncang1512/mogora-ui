@@ -1,5 +1,10 @@
 import { createContext, useContext } from "react";
-import { DrawerComponent, DrawerType, TriggerProps } from "./types";
+import {
+  ContentProps,
+  DrawerComponent,
+  DrawerType,
+  TriggerProps,
+} from "./types";
 import useOpenChange from "../utils/openState";
 import { cn } from "../utils/utils";
 import useDraggableDrawer from "../utils/useDraggable";
@@ -53,9 +58,10 @@ const Trigger: React.FC<TriggerProps> = ({
   );
 };
 
-const Content: React.FC<{ children: React.ReactNode; className?: string }> = ({
+const Content: React.FC<ContentProps> = ({
   children,
   className,
+  render,
   ...props
 }) => {
   const { drawerProps, open, setOpenChange, classDrawer } =
@@ -90,7 +96,7 @@ const Content: React.FC<{ children: React.ReactNode; className?: string }> = ({
         onClick={(e) => e.stopPropagation()}
         data-state={open ? "open" : "closed"}
         className={cn(
-          "absolute z-50 w-full h-[70vh] bg-white px-6 pb-6 pt-3 shadow-lg bottom-0 flex flex-col",
+          "absolute z-50 w-full h-[70vh] bg-white md:px-6 px-3 md:pb-6 pb-3 pt-3 shadow-lg bottom-0 flex flex-col rounded-t-lg items-center",
           "transition-transform ease-in-out duration-300 will-change-transform",
           "data-[state=closed]:translate-y-full",
           "data-[state=open]:translate-y-0",
@@ -102,7 +108,11 @@ const Content: React.FC<{ children: React.ReactNode; className?: string }> = ({
           className="flex justify-center cursor-default"
           onMouseDown={handleMouseDown}
         >
-          <div className="h-2 bg-gray-300 rounded-lg w-[10%] self-center"></div>
+          {render ? (
+            render()
+          ) : (
+            <div className="h-2 bg-gray-300 rounded-lg w-[15vh] self-center"></div>
+          )}
         </button>
         {children}
       </div>
