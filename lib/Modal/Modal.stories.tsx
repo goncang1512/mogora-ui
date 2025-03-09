@@ -15,7 +15,7 @@ const Template: StoryFn = (args) => (
     <Modal.Trigger>
       <Button variant="clicki">Open Modal</Button>
     </Modal.Trigger>
-    <Modal.Content className="p-6 bg-white rounded-lg shadow-lg">
+    <Modal.Content className="p-6">
       <h2 className="text-lg font-bold">Modal Title</h2>
       <p className="mt-2">This is a simple modal example.</p>
     </Modal.Content>

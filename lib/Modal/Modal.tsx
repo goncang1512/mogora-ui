@@ -70,7 +70,7 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
       <div
         onClick={(e) => e.stopPropagation()}
         className={cn(
-          "relative z-50 w-full max-w-lg rounded-lg bg-white p-6 shadow-lg transition-all duration-200",
+          "relative z-50 w-full max-w-lg rounded-none md:rounded-lg bg-white p-6 shadow-lg transition-all duration-200",
           "animate-in fade-in zoom-in slide-in-from-top-[48%]",
           className
         )}

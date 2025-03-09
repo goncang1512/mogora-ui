@@ -18,7 +18,7 @@ const inputVariants = cva("", {
     },
     size: {
       small: "px-2 py-1 text-sm",
-      normal: "p-2.5 text-sm w-full",
+      normal: "p-2.5 text-base w-full",
       large: "px-6 py-3 text-lg",
     },
     theme: {

@@ -115,7 +115,7 @@ const Content: React.FC<ContentProps> = ({
         {...props}
       >
         <button
-          className="flex justify-center cursor-default w-full"
+          className="flex justify-center cursor-default w-full h-5"
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         >
