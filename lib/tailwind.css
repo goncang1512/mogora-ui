@@ -8,10 +8,10 @@
 
 @layer utilities {
   .float-\[default\] {
-    @apply absolute duration-300 transform top-1/2 left-2 -translate-y-7 peer-placeholder-shown:-translate-y-1/2 peer-focus:-translate-y-7 bg-white px-1 peer-focus:scale-110;
+    @apply absolute duration-300 transform top-1/2 left-2 -translate-y-7 peer-placeholder-shown:-translate-y-1/2 peer-focus:-translate-y-7 bg-white px-1 peer-focus:scale-100;
   }
 
   .float-\[underline\] {
-    @apply absolute duration-300 transform top-1/2 left-2 -translate-y-7 peer-placeholder-shown:-translate-y-1/2 peer-focus:-translate-y-7 bg-white px-1 peer-focus:scale-110;
+    @apply absolute duration-300 transform top-1/2 left-2 -translate-y-7 peer-placeholder-shown:-translate-y-1/2 peer-focus:-translate-y-7 bg-white px-1 peer-focus:scale-100;
   }
 }
