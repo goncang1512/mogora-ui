@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect } from "react";
 import { TriggerProps, ContentProps, ModalComponent, ModalType } from "./types";
 import { cn } from "../utils/utils";
 import useOpenChange from "../utils/openState";
-import { createPortal } from "react-dom";
 
 const ModalContext = createContext<ModalType>({} as ModalType);
 
@@ -58,11 +57,11 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
     modalProps,
   } = useContext(ModalContext);
 
-  return createPortal(
+  return (
     <div
       data-state={onShow ? "open" : "closed"}
       className={cn(
-        "fixed inset-0 z-[9999] flex items-center justify-center bg-black/80",
+        "fixed data-[state=closed]:hidden inset-0 z-[9999] flex items-center justify-center bg-black/80 isolate",
         classContainer
       )}
       onClick={() => setOnShow(false)}
@@ -71,7 +70,7 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
       <div
         onClick={(e) => e.stopPropagation()}
         className={cn(
-          "relative z-50 w-full max-w-lg rounded-lg bg-white p-6 shadow-lg transition-all duration-200",
+          "relative w-full max-w-lg rounded-none md:rounded-lg bg-white p-6 shadow-lg transition-all duration-200",
           "animate-in fade-in zoom-in slide-in-from-top-[48%]",
           className
         )}
@@ -79,8 +78,7 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
       >
         {children}
       </div>
-    </div>,
-    document.body
+    </div>
   );
 };
 

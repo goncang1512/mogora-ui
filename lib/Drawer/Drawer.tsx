@@ -94,7 +94,7 @@ const Content: React.FC<ContentProps> = ({
         }, 50);
       }}
       className={cn(
-        "fixed inset-0 flex items-center justify-center bg-black/70 transition-opacity w-screen ease-linear duration-100 z-[9999] overflow-hidden",
+        "fixed inset-0 flex items-center justify-center bg-black/70 transition-opacity w-screen ease-linear duration-100 z-[9999] overflow-hidden isolate",
         "data-[state=open]:opacity-100 data-[state=open]:pointer-events-auto",
         "data-[state=closed]:pointer-events-none data-[state=closed]:opacity-0",
         classDrawer

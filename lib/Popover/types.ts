@@ -19,6 +19,8 @@ type PopoverType = {
   seeContent: boolean;
   setSeeContent: Dispatch<SetStateAction<boolean>>;
   buttonTrigger: RefObject<HTMLDivElement | null>;
+  classPopover?: string;
+  propPopover: HTMLAttributes<HTMLDivElement>;
 };
 
 interface TriggerProps extends HTMLAttributes<HTMLDivElement> {

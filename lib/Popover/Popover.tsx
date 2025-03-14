@@ -31,6 +31,8 @@ export const Popover: PopoverComponent = ({
         seeContent,
         setSeeContent,
         buttonTrigger,
+        classPopover: className,
+        propPopover: props,
       }}
     >
       <div className={cn("relative inline-flex", className)} {...props}>
@@ -53,7 +55,7 @@ const Trigger: React.FC<TriggerProps> = ({
     <div
       ref={buttonTrigger}
       onClick={() => setSeeContent(!seeContent)}
-      className={cn("cursor-pointer inline", className)}
+      className={cn("cursor-pointer", className)}
       {...props}
     >
       {children}
