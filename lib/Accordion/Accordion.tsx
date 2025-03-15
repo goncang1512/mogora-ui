@@ -62,10 +62,14 @@ const Content: React.FC<ContentProps> = ({ children, className, ...props }) => {
     <div
       data-open={valueItem === value}
       className={cn(
-        "overflow-hidden dark:text-slate-200 transition-all duration-200 ease-in-out",
-        "data-[open=true]:max-h-96 data-[open=true]:opacity-100 data-[open=true]:py-2 data-[open=false]:max-h-0 data-[open=false]:opacity-0 data-[open=false]:py-0",
+        "overflow-hidden dark:text-slate-200 transition-all duration-300 ease-in-out transform",
+        "data-[open=true]:max-h-96 data-[open=true]:opacity-100 data-[open=true]:py-2 data-[open=true]:translate-y-0",
+        "data-[open=false]:max-h-0 data-[open=false]:opacity-0 data-[open=false]:py-0 data-[open=false]:translate-y-2",
         className
       )}
+      style={{
+        transitionDelay: valueItem === value ? `30ms` : "0ms",
+      }}
       {...props}
     >
       {children}
@@ -79,16 +83,25 @@ const Item: React.FC<ItemProps> = ({
   value,
   ...props
 }): ReactNode => {
+  const { valueItem } = useContext(AccordionContext);
+
   return (
     <div
-      className={cn("border-b border-gray-400 py-3", className)}
-      {...props}
       data-value={value}
+      data-open={valueItem === value}
+      className={cn(
+        "border-b border-gray-400 pt-3 pb-3 data-[open=true]:pb-1",
+        className
+      )}
+      {...props}
     >
-      {React.Children.map(children, (child) =>
+      {React.Children.map(children, (child, index) =>
         React.cloneElement(
           child as React.ReactElement,
-          { value } as Partial<ItemProps>
+          {
+            value,
+            style: { transitionDelay: `${index * 30}ms` },
+          } as Partial<ItemProps>
         )
       )}
     </div>

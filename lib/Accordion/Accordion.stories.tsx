@@ -15,13 +15,13 @@ export const Default: Story = {
     <Accordion>
       <Accordion.Item value="item1">
         <Accordion.Trigger>Section 1</Accordion.Trigger>
-        <Accordion.Content>
+        <Accordion.Content className="hover:bg-gray-100 px-2 rounded-md">
           <p>Content for section 1</p>
         </Accordion.Content>
-        <Accordion.Content>
+        <Accordion.Content className="hover:bg-gray-100 px-2 rounded-md">
           <p>Content for section 1</p>
         </Accordion.Content>
-        <Accordion.Content>
+        <Accordion.Content className="hover:bg-gray-100 px-2 rounded-md">
           <p>Content for section 1</p>
         </Accordion.Content>
       </Accordion.Item>
