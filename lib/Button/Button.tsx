@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 import { cn } from "../utils/utils";
 import { VariantProps } from "class-variance-authority";
 import { buttonVariants } from "./variants";
@@ -9,19 +9,18 @@ export interface ButtonProps
   children?: ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  children,
-  className,
-  variant,
-  size,
-  ...props
-}): ReactNode => {
-  return (
-    <button
-      className={cn(buttonVariants({ className, variant, size }))}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, className, variant, size, ...props }, ref): ReactNode => {
+    return (
+      <button
+        ref={ref}
+        className={cn(buttonVariants({ className, variant, size }))}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";

@@ -1,6 +1,6 @@
 "use client";
 import { cva, VariantProps } from "class-variance-authority";
-import React, { InputHTMLAttributes, ReactNode } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 import { cn } from "../utils/utils";
 
 interface InputProps
@@ -38,17 +38,16 @@ const inputVariants = cva("", {
   },
 });
 
-export const Input: React.FC<InputProps> = ({
-  className,
-  variant,
-  size,
-  theme,
-  ...props
-}): ReactNode => {
-  return (
-    <input
-      className={cn(inputVariants({ className, variant, size, theme }))}
-      {...props}
-    />
-  );
-};
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, variant, size, theme, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        className={cn(inputVariants({ className, variant, size, theme }))}
+        {...props}
+      />
+    );
+  }
+);
+
+Input.displayName = "Input";

@@ -14,7 +14,7 @@ const tableVariants = cva("w-full font-poppins", {
       default: "",
       zebra: "",
       bordered:
-        "border-separate border  border-gray-300 rounded-lg border-spacing-0",
+        "border-separate border  border-gray-300 rounded-md border-spacing-0",
     }),
     size: createSize({
       default: "",
@@ -105,7 +105,7 @@ const bodyVariant = cva("bg-transparent", {
     variant: createVariant({
       default: "",
       zebra: "",
-      bordered: "overflow-hidden rounded-b-lg",
+      bordered: "overflow-hidden rounded-b-md",
     }),
     size: createSize({
       default: "px-2",

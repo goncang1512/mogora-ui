@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import React, { ReactNode, TextareaHTMLAttributes } from "react";
+import { forwardRef, ReactNode, TextareaHTMLAttributes } from "react";
 import { cn } from "../utils/utils";
 
 interface TextareaProps
@@ -35,19 +35,18 @@ const texareaVariant = cva("", {
   },
 });
 
-export const Textarea: React.FC<TextareaProps> = ({
-  className,
-  variant,
-  size,
-  theme,
-  placeholder,
-  ...props
-}): ReactNode => {
-  return (
-    <textarea
-      placeholder={placeholder ?? "Type your message here"}
-      className={cn(texareaVariant({ className, variant, size, theme }))}
-      {...props}
-    />
-  );
-};
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (
+    { className, variant, size, theme, placeholder, ...props },
+    ref
+  ): ReactNode => {
+    return (
+      <textarea
+        ref={ref}
+        placeholder={placeholder ?? "Type your message here"}
+        className={cn(texareaVariant({ className, variant, size, theme }))}
+        {...props}
+      />
+    );
+  }
+);
