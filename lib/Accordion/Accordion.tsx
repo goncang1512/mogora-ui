@@ -95,15 +95,15 @@ const Item: React.FC<ItemProps> = ({
       )}
       {...props}
     >
-      {React.Children.map(children, (child, index) =>
-        React.cloneElement(
-          child as React.ReactElement,
-          {
-            value,
-            style: { transitionDelay: `${index * 30}ms` },
-          } as Partial<ItemProps>
-        )
-      )}
+      {children
+        ? React.Children.map(children, (child, index) => {
+            if (!React.isValidElement(child)) return child;
+            return React.cloneElement(child, {
+              value,
+              style: { transitionDelay: `${index * 30}ms` },
+            } as Partial<ItemProps>);
+          })
+        : null}
     </div>
   );
 };

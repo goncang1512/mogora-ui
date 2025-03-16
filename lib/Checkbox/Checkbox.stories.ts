@@ -7,7 +7,7 @@ const meta: Meta<typeof Checkbox> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["default", "primary", "success", "danger", "warning"],
+      options: ["primary", "success", "danger", "warning", "accent", "info"],
     },
     size: {
       control: { type: "select" },
@@ -21,7 +21,7 @@ type Story = StoryObj<typeof Checkbox>;
 
 export const Component: Story = {
   args: {
-    variant: "default",
+    variant: "primary",
     size: "md",
   },
 };

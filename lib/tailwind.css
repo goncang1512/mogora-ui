@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: oklch(0.278 0.033 256.848);
+  --color-secondary: oklch(0.705 0.015 286.067);
+  --color-danger: oklch(0.637 0.237 25.331);
+  --color-info: oklch(0.789 0.154 211.53);
+  --color-success: oklch(0.723 0.219 149.579);
+  --color-accent: oklch(0.623 0.214 259.815);
+  --color-neutral: oklch(0.928 0.006 264.531);
+  --color-warning: oklch(0.828 0.189 84.429);
+}
+
 @layer components {
   button {
     @apply cursor-pointer;

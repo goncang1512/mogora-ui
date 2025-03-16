@@ -8,15 +8,12 @@ const checkboxVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "text-slate-900 peer-checked:bg-slate-800 peer-checked:text-white",
-        primary:
-          "text-blue-600 peer-checked:bg-blue-500 peer-checked:text-white",
-        success:
-          "text-green-600 peer-checked:bg-green-500 peer-checked:text-white",
-        danger: "text-red-600 peer-checked:bg-red-500 peer-checked:text-white",
-        warning:
-          "text-yellow-500 peer-checked:bg-yellow-500 peer-checked:text-white",
+        primary: "text-primary peer-checked:bg-primary peer-checked:text-white",
+        success: "text-success peer-checked:bg-success peer-checked:text-white",
+        danger: "text-danger peer-checked:bg-danger peer-checked:text-white",
+        warning: "text-warning peer-checked:bg-warning peer-checked:text-white",
+        accent: "text-accent peer-checked:bg-accent peer-checked:text-white",
+        info: "text-info peer-checked:bg-info peer-checked:text-white",
       },
       size: {
         sm: "w-4 h-4",
@@ -25,7 +22,7 @@ const checkboxVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "md",
     },
   }

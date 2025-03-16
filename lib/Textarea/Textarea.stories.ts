@@ -15,7 +15,15 @@ const meta: Meta<typeof Textarea> = {
     },
     theme: {
       control: { type: "select" },
-      options: ["primary", "secondary", "danger", "success", "info"],
+      options: [
+        "primary",
+        "secondary",
+        "danger",
+        "success",
+        "info",
+        "warning",
+        "accent",
+      ],
     },
   },
 };

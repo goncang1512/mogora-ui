@@ -7,8 +7,8 @@ const meta: Meta<typeof Input> = {
   component: Input,
   argTypes: {
     variant: {
-      control: false,
-      options: ["default", "underline"], // Sesuaikan dengan varian yang ada di `inputVariants`
+      control: { type: "select" },
+      options: ["bordered", "underline"], // Sesuaikan dengan varian yang ada di `inputVariants`
     },
     size: {
       control: { type: "select" },
@@ -16,7 +16,15 @@ const meta: Meta<typeof Input> = {
     },
     theme: {
       control: { type: "select" },
-      options: ["primary", "secondary", "danger", "success", "info"],
+      options: [
+        "primary",
+        "secondary",
+        "danger",
+        "success",
+        "info",
+        "warning",
+        "accent",
+      ],
     },
   },
 };
@@ -27,9 +35,9 @@ type Story = StoryObj<typeof Input>;
 export const Default: Story = {
   args: {
     placeholder: "Default",
-    variant: "default",
+    variant: "bordered",
     size: "normal",
-    theme: "danger",
+    theme: "primary",
   },
 };
 

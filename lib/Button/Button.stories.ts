@@ -7,7 +7,19 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["danger", "primary", "clicked"], // Sesuaikan dengan varian yang ada di `buttonVariants`
+      options: [
+        "primary",
+        "secondary",
+        "success",
+        "danger",
+        "warning",
+        "info",
+        "outline",
+        "gost",
+        "link",
+        "clicki",
+        "shadow",
+      ],
     },
     size: {
       control: { type: "select" },
@@ -23,7 +35,7 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
   args: {
     children: "Click Me",
-    variant: "danger",
+    variant: "primary",
     size: "normal",
   },
 };
