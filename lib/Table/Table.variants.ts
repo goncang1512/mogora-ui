@@ -86,8 +86,27 @@ const headerVariant = cva("font-medium text-start px-2 py-2 bg-transparent", {
   variants: {
     variant: createVariant({
       default: "",
-      zebra: "",
+      zebra: "hover:bg-red-300 bg-red-500",
       bordered: "bg-gray-200 border-b",
+    }),
+    size: createSize({
+      default: "px-2",
+      normal: "",
+    }),
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "default",
+  },
+});
+
+const headerrowVariants = cva("", {
+  variants: {
+    variant: createVariant({
+      default:
+        "text-start border-gray-300  hover:bg-slate-100 duration-100 border-b",
+      zebra: "bg-gray-100 hover:bg-gray-200",
+      bordered: "",
     }),
     size: createSize({
       default: "px-2",
@@ -125,4 +144,5 @@ export {
   headerCellVariant,
   headerVariant,
   bodyVariant,
+  headerrowVariants,
 };

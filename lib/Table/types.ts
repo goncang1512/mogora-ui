@@ -6,7 +6,11 @@ import React, {
   TdHTMLAttributes,
   ThHTMLAttributes,
 } from "react";
-import { tableVariants, rowVariants } from "./Table.variants";
+import {
+  tableVariants,
+  rowVariants,
+  headerrowVariants,
+} from "./Table.variants";
 
 interface TableType {
   variant:
@@ -23,6 +27,7 @@ type TableComponent = React.FC<TableProps> & {
   Cell: React.FC<TableCellProps>;
   Row: React.FC<RowProps>;
   Body: React.FC<BodyProps>;
+  HeaderRow: React.FC<HeaderRowProps>;
 };
 
 interface TableProps
@@ -47,6 +52,10 @@ interface HeaderProps extends HTMLAttributes<HTMLTableSectionElement> {
   children: ReactNode;
 }
 
+interface HeaderRowProps
+  extends VariantProps<typeof headerrowVariants>,
+    HTMLAttributes<HTMLTableRowElement> {}
+
 export type {
   TableComponent,
   TableProps,
@@ -56,4 +65,5 @@ export type {
   TableHeaderProps,
   TableCellProps,
   BodyProps,
+  HeaderRowProps,
 };

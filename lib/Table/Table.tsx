@@ -13,6 +13,7 @@ import {
   bodyVariant,
   cellVariants,
   headerCellVariant,
+  headerrowVariants,
   headerVariant,
   rowVariants,
   tableVariants,
@@ -103,7 +104,20 @@ const Header: React.FC<HeaderProps> = ({ children, className, ...props }) => {
   );
 };
 
+const HeaderRow: React.FC<RowProps> = ({ children, className, ...props }) => {
+  const { variant, size } = useContext(TableContext);
+  return (
+    <tr
+      className={cn(headerrowVariants({ variant, size, className }))}
+      {...props}
+    >
+      {children}
+    </tr>
+  );
+};
+
 Table.Header = Header;
+Table.HeaderRow = HeaderRow;
 Table.HeaderCell = HeaderCell;
 Table.Cell = Cell;
 Table.Row = Row;

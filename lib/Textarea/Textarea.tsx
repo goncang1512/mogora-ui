@@ -9,7 +9,7 @@ interface TextareaProps
 const texareaVariant = cva("", {
   variants: {
     variant: {
-      default:
+      bordered:
         "border-2 dark:border-slate-600 border-slate-300 rounded-md focus:outline text-black dark:text-slate-200",
       underline:
         "border-b-2 outline-none dark:border-slate-600 border-slate-300 text-black dark:text-slate-200",
@@ -30,7 +30,7 @@ const texareaVariant = cva("", {
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: "bordered",
     size: "normal",
     theme: "primary",
   },

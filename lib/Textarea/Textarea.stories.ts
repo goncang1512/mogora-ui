@@ -7,7 +7,7 @@ const meta: Meta<typeof Textarea> = {
   argTypes: {
     variant: {
       control: false,
-      options: ["default", "underline"],
+      options: ["bordered", "underline"],
     },
     size: {
       control: { type: "select" },
@@ -34,7 +34,7 @@ type Story = StoryObj<typeof Textarea>;
 export const Default: Story = {
   args: {
     placeholder: "Default",
-    variant: "default",
+    variant: "bordered",
     size: "normal",
     theme: "danger",
   },

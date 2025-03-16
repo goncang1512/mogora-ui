@@ -10,11 +10,11 @@ const Template: StoryFn<typeof Table> = (args) => {
   return (
     <Table {...args}>
       <Table.Header>
-        <Table.Row>
+        <Table.HeaderRow>
           <Table.HeaderCell>Nama</Table.HeaderCell>
           <Table.HeaderCell>Email</Table.HeaderCell>
           <Table.HeaderCell>HP</Table.HeaderCell>
-        </Table.Row>
+        </Table.HeaderRow>
       </Table.Header>
       <Table.Body>
         <Table.Row>

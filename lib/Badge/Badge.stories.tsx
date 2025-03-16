@@ -9,7 +9,7 @@ const meta: Meta<typeof Badge> = {
       control: {
         type: "select",
       },
-      options: ["default", "secondary", "outline"],
+      options: ["primary", "secondary", "outline", "ghost"],
     },
     className: {
       control: "text",
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof Badge>;
 
 export const Default: Story = {
   args: {
-    variant: "default",
+    variant: "primary",
     children: "Default Badge",
   },
 };
